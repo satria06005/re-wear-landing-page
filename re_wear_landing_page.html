@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RE—WEAR // Pakaian Pilihan Berkualitas, Bersih dan Siap Pakai</title>
+    <meta name="description" content="Toko kurasi pakaian vintage dan pre-loved pilihan. Dicuci bersih dengan uap panas 120°C, diukur manual sentimeter demi sentimeter, dan dijamin 100% original.">
+
+    <!-- Google Fonts: Plus Jakarta Sans (Sangat mudah dibaca oleh semua usia, aperture terbuka, kontras tajam) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-bg': '#FAF8F5',
+                        'brand-card': '#FFFFFF',
+                        'brand-surface': '#F3EFEA',
+                        'brand-border': '#DDD7CB',
+                        'brand-border-dark': '#C5BEAF',
+                        // High-contrast, easy-to-read text colors (WCAG AAA compliant)
+                        'brand-text': '#111827',        // Sangat kontras dan jelas (hampir hitam pekat)
+                        'brand-text-muted': '#374151',  // Abu-abu gelap terbaca jelas
+                        'brand-text-soft': '#4B5563',   // Untuk informasi sekunder yang tetap mudah dibaca
+                        'brand-primary': '#1A2E22',     // Deep Forest Charcoal
+                        'brand-accent': '#9A462B',      // Warm Terracotta
+                        'brand-accent-bg': '#FDF4F0',
+                        'brand-green': '#245E38',       // Hijau ramah & terpercaya
+                        'brand-green-bg': '#EDF7F0',
+                    },
+                    boxShadow: {
+                        'card': '0 2px 12px -2px rgba(17, 24, 39, 0.06)',
+                        'card-hover': '0 12px 28px -4px rgba(17, 24, 39, 0.12)',
+                        'modal': '0 24px 60px -8px rgba(17, 24, 39, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Base Styling & Accessibility Preferences */
+        body {
+            background-color: #FAF8F5;
+            color: #111827;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        /* Fluid Close-up Image Reveal Animation */
+        .img-reveal-wrapper {
+            overflow: hidden;
+            position: relative;
+            background-color: #EFEBE3;
+        }
+
+        /* Image starts in fluid close-up (scale 1.15) and settles softly into frame */
+        .img-reveal-wrapper .img-reveal-target {
+            transform: scale(1.15);
+            opacity: 0;
+            filter: blur(4px);
+            transition: transform 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.85s ease;
+            will-change: transform, opacity, filter;
+        }
+
+        .img-reveal-wrapper.is-revealed .img-reveal-target {
+            transform: scale(1);
+            opacity: 1;
+            filter: blur(0);
+        }
+
+        /* Fluid hover close-up zoom */
+        .img-reveal-wrapper:hover .img-reveal-target {
+            transform: scale(1.06);
+            transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* High-magnification inspection lens */
+        .lens-container {
+            overflow: hidden;
+            cursor: zoom-in;
+        }
+        .lens-container img {
+            transition: transform 0.2s ease-out;
+            transform-origin: center center;
+        }
+
+        /* Readable selection */
+        ::selection {
+            background-color: #111827;
+            color: #FFFFFF;
+        }
+
+        /* Clean and clear scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F3EFEA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #C5BEAF;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #111827;
+        }
+
+        /* Fluid Layout & Content Scroll Reveal */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(28px);
+            filter: blur(4px);
+            transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                        filter 0.65s ease-out;
+            will-change: opacity, transform, filter;
+        }
+
+        .reveal-on-scroll.is-revealed {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Staggered delay for cascading fluid items */
+        .reveal-delay-1 { transition-delay: 0.08s; }
+        .reveal-delay-2 { transition-delay: 0.16s; }
+        .reveal-delay-3 { transition-delay: 0.24s; }
+        .reveal-delay-4 { transition-delay: 0.32s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-on-scroll, .img-reveal-wrapper .img-reveal-target {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         1. BARIS INFORMASI ATAS (MINIMALIS & MEWAH)
+    =========================================== -->
+    <aside aria-label="Informasi Toko" class="bg-[#18181B] text-neutral-300 text-xs py-2.5 px-4 sm:px-8 border-b border-neutral-800">
+        <div class="max-w-[1320px] mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-2">
+                <span class="inline-block w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+                <span class="tracking-normal font-medium text-neutral-200">Kurasi Pakaian Terpilih Edisi Minggu Ini · 100% Asli & Higienis</span>
+            </div>
+            <div class="flex items-center gap-5 text-neutral-400 font-normal">
+                <span>Studio Jakarta: 10.00 – 21.00 WIB</span>
+                <span class="hidden sm:inline text-neutral-600">|</span>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-neutral-500">Rilis Baru:</span>
+                    <strong id="live-countdown" class="text-neutral-200 font-medium tracking-wide">02 Hari : 14 Jam : 38 Menit : 42 Detik</strong>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ==========================================
+         2. NAVIGASI UTAMA (CLEAN, MEWAH & PROFESIONAL)
+    =========================================== -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-neutral-200/80">
+        <div class="max-w-[1320px] mx-auto px-4 sm:px-8 h-20 flex justify-between items-center gap-6">
+            
+            <!-- Logo Brand (Satu Baris, Rapi & Elegan) -->
+            <a href="#" class="flex items-center gap-3 flex-shrink-0 group">
+                <span class="font-extrabold text-2xl tracking-tight text-neutral-900 whitespace-nowrap">RE—WEAR</span>
+                <span class="hidden md:inline-block text-[11px] font-semibold uppercase tracking-widest text-neutral-400 pl-3 border-l border-neutral-300 whitespace-nowrap">
+                    Studio Pilihan
+                </span>
+            </a>
+
+            <!-- Menu Teks Jelas, Rapi & Tidak Membungkus Baris -->
+            <nav class="hidden lg:flex items-center gap-8 text-sm font-medium text-neutral-600" aria-label="Navigasi Utama">
+                <a href="#koleksi-drop" class="hover:text-neutral-950 transition-colors whitespace-nowrap py-1">Koleksi Pakaian</a>
+                <a href="#cara-pembersihan" class="hover:text-neutral-950 transition-colors whitespace-nowrap py-1">Cara Pembersihan</a>
+                <a href="#panduan-kondisi" class="hover:text-neutral-950 transition-colors whitespace-nowrap py-1">Panduan Kondisi</a>
+                <a href="#tentang-kami" class="hover:text-neutral-950 transition-colors whitespace-nowrap py-1">Tentang Kami</a>
+                <a href="#tanya-jawab" class="hover:text-neutral-950 transition-colors whitespace-nowrap py-1">Tanya Jawab</a>
+            </nav>
+
+            <!-- Aksi: WhatsApp Mewah & Keranjang Pemesanan (Tanpa Warna Neon/Mencolok) -->
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <!-- Tombol WhatsApp: Putih Minimalis Mewah -->
+                <a href="https://wa.me/6281234567890?text=Halo%20RE-WEAR,%20saya%20ingin%20bertanya%20tentang%20koleksi%20pakaian" target="_blank" class="hidden sm:inline-flex items-center gap-2 border border-neutral-300 hover:border-neutral-900 bg-white hover:bg-neutral-50 text-neutral-800 hover:text-neutral-950 px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all whitespace-nowrap shadow-none">
+                    <i class="ph ph-whatsapp-logo text-base text-neutral-700"></i>
+                    <span>Tanya WhatsApp</span>
+                </a>
+
+                <!-- Tombol Pesan: Matte Dark Pill Elegan -->
+                <button onclick="openOrderModal()" class="flex items-center gap-2 bg-neutral-900 hover:bg-black text-white px-4 py-2 rounded-full text-xs font-semibold tracking-wide transition-all shadow-sm whitespace-nowrap" aria-label="Buka Formulir Pemesanan">
+                    <i class="ph ph-shopping-bag text-base"></i>
+                    <span>Pesan</span>
+                    <span id="bag-count" class="bg-neutral-700 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full ml-0.5">0</span>
+                </button>
+
+                <!-- Tombol Menu HP -->
+                <button id="mobile-toggle-btn" class="lg:hidden p-2 text-neutral-800 border border-neutral-300 bg-white hover:bg-neutral-50 rounded-md transition-colors" aria-label="Buka Menu">
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menu Dropdown HP (Rapi & Bersih) -->
+        <div id="mobile-dropdown" class="hidden lg:hidden border-t border-neutral-200 bg-white px-6 py-5 space-y-3 text-sm font-semibold shadow-md">
+            <a href="#koleksi-drop" class="block py-2 text-neutral-800 hover:text-black border-b border-neutral-100">Koleksi Pakaian</a>
+            <a href="#cara-pembersihan" class="block py-2 text-neutral-800 hover:text-black border-b border-neutral-100">Cara Pembersihan</a>
+            <a href="#panduan-kondisi" class="block py-2 text-neutral-800 hover:text-black border-b border-neutral-100">Panduan Kondisi</a>
+            <a href="#tentang-kami" class="block py-2 text-neutral-800 hover:text-black border-b border-neutral-100">Tentang Kami</a>
+            <a href="#tanya-jawab" class="block py-2 text-neutral-800 hover:text-black border-b border-neutral-100">Tanya Jawab (FAQ)</a>
+            <div class="pt-2">
+                <a href="https://wa.me/6281234567890?text=Halo%20RE-WEAR,%20saya%20ingin%20bertanya%20tentang%20koleksi%20pakaian" target="_blank" class="w-full inline-flex items-center justify-center gap-2 border border-neutral-300 bg-neutral-50 text-neutral-800 py-2.5 rounded-md text-sm font-semibold">
+                    <i class="ph ph-whatsapp-logo text-base"></i>
+                    <span>Tanya WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- ==========================================
+         3. HERO SECTION (LUGAS, HANGAT, NATURAL)
+    =========================================== -->
+    <section class="max-w-[1320px] mx-auto border-b border-brand-border bg-brand-bg">
+        <div class="grid grid-cols-1 lg:grid-cols-12 min-h-[580px]">
+            
+            <!-- Kolom Teks Utama (7 Kolom) -->
+            <div class="lg:col-span-7 p-6 sm:p-12 lg:p-14 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-brand-border reveal-on-scroll">
+                <div>
+                    <!-- Lencana Sederhana & Ramah -->
+                    <div class="inline-flex items-center gap-2 bg-white border border-neutral-300 px-3.5 py-1.5 rounded-full text-xs font-medium text-neutral-700 mb-6 shadow-none">
+                        <span class="w-1.5 h-1.5 rounded-full bg-neutral-600"></span>
+                        <span>Koleksi Pilihan Minggu Ini Sudah Tersedia</span>
+                    </div>
+
+                    <!-- Judul Utama (Mudah Dibaca, Lugas, Tanpa Hiperbola) -->
+                    <h1 class="text-3xl sm:text-5xl lg:text-5xl font-extrabold text-brand-text tracking-tight leading-[1.15] mb-5">
+                        Pakaian Pilihan Berkualitas,<br/>
+                        Bersih dan Siap Langsung Dipakai.
+                    </h1>
+
+                    <!-- Paragraf Penjelasan yang Tenang dan Meyakinkan -->
+                    <p class="text-brand-text-muted text-base sm:text-lg leading-relaxed max-w-xl mb-8 font-normal">
+                        Kami memilih sendiri pakaian bermerek yang masih terawat baik dari berbagai koleksi. Setiap helai pakaian kami cuci bersih, disterilkan dengan uap suhu tinggi, dan diukur dengan teliti menggunakan meteran agar pas di badan Anda.
+                    </p>
+
+                    <!-- Tombol Navigasi -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-10">
+                        <a href="#koleksi-drop" class="bg-brand-text hover:bg-black text-white px-7 py-3.5 rounded-md text-base font-semibold transition-all text-center flex items-center justify-center gap-2 shadow-sm">
+                            <span>Lihat Koleksi Pakaian</span>
+                            <i class="ph ph-arrow-down font-bold"></i>
+                        </a>
+
+                        <a href="#cara-pembersihan" class="border border-brand-border-dark bg-white hover:bg-brand-surface text-brand-text px-6 py-3.5 rounded-md text-base font-semibold transition-all text-center">
+                            Cara Kami Membersihkan Pakaian
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 3 Jaminan Utama (Sangat Terbaca & Terpercaya) -->
+                <div class="pt-6 border-t border-brand-border grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2 text-neutral-900 font-bold text-sm">
+                            <i class="ph ph-seal-check text-lg text-neutral-700"></i>
+                            <span>100% Barang Asli</span>
+                        </div>
+                        <p class="text-xs text-brand-text-soft leading-normal">
+                            Garansi uang kembali penuh jika barang terbukti bukan orisinil.
+                        </p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2 text-neutral-900 font-bold text-sm">
+                            <i class="ph ph-drop text-lg text-neutral-700"></i>
+                            <span>Dicuci Uap 120°C</span>
+                        </div>
+                        <p class="text-xs text-brand-text-soft leading-normal">
+                            Bebas bakteri dan bau apek. Langsung siap dipakai saat paket tiba.
+                        </p>
+                    </div>
+
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2 text-brand-text font-bold text-sm">
+                            <i class="ph ph-ruler text-lg text-neutral-700"></i>
+                            <span>Ukuran Pasti (cm)</span>
+                        </div>
+                        <p class="text-xs text-brand-text-soft leading-normal">
+                            Panjang dan lebar dada diukur langsung dengan pita meteran.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Kolom Produk Pilihan di Kanan (5 Kolom) -->
+            <div class="lg:col-span-5 p-6 sm:p-10 bg-brand-surface/60 flex flex-col justify-center">
+                
+                <div class="bg-white border border-brand-border rounded-lg p-6 shadow-card group reveal-on-scroll reveal-delay-2">
+                    
+                    <div class="flex justify-between items-center pb-3 mb-3 border-b border-gray-100 text-sm">
+                        <span class="font-bold text-brand-text flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-neutral-900"></span>
+                            Pilihan Unggulan Minggu Ini
+                        </span>
+                        <span class="bg-neutral-100 text-neutral-800 border border-neutral-200 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                            Kondisi Sangat Bagus (9/10)
+                        </span>
+                    </div>
+
+                    <!-- Wadah Gambar dengan Transisi Close-Up yang Halus -->
+                    <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
+                        <img id="hero-feature-img" 
+                             src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Jaket Kanvas Tebal Carhartt Detroit" 
+                             class="img-reveal-target w-full h-full object-cover">
+                        
+                        <div class="absolute bottom-3 left-3 bg-brand-text/90 text-white text-xs font-medium px-3 py-1.5 rounded">
+                            <span id="hero-feature-angle-label">Foto: Tampak Keseluruhan</span>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Sudut Foto (Teks Mudah Dipahami) -->
+                    <div class="grid grid-cols-3 gap-2 mb-4 text-xs font-semibold">
+                        <button onclick="switchHeroAngle(0)" class="hero-angle-btn border border-brand-text bg-brand-text text-white py-2 px-2 text-center rounded transition-all" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=80" data-label="Foto: Tampak Keseluruhan">
+                            1. Keseluruhan
+                        </button>
+                        <button onclick="switchHeroAngle(1)" class="hero-angle-btn border border-brand-border bg-white text-brand-text hover:border-brand-text py-2 px-2 text-center rounded transition-all" data-img="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80" data-label="Foto: Serat Bahan Kain Katun">
+                            2. Bahan Kain
+                        </button>
+                        <button onclick="switchHeroAngle(2)" class="hero-angle-btn border border-brand-border bg-white text-brand-text hover:border-brand-text py-2 px-2 text-center rounded transition-all" data-img="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80" data-label="Foto: Ritsleting & Kancing Asli">
+                            3. Kancing & Tag
+                        </button>
+                    </div>
+
+                    <!-- Informasi Ukuran yang Sangat Jelas -->
+                    <div class="space-y-2 mb-5">
+                        <div class="flex justify-between items-baseline">
+                            <div>
+                                <h3 class="text-xl font-bold text-brand-text">Jaket Kanvas Carhartt Detroit</h3>
+                                <p class="text-xs text-brand-text-soft">Warna Hijau Lumut · Bahan Kanvas Katun Tebal</p>
+                            </div>
+                            <span class="text-xl font-extrabold text-brand-accent">Rp 1.450.000</span>
+                        </div>
+
+                        <!-- Kotak Rincian Ukuran Mudah Dibaca -->
+                        <div class="bg-brand-surface p-3.5 rounded-md border border-brand-border text-sm text-brand-text grid grid-cols-2 gap-2 font-medium">
+                            <div>Lebar Dada: <strong class="font-bold text-brand-text">62 cm (Pas untuk L–XL)</strong></div>
+                            <div>Panjang Jaket: <strong class="font-bold text-brand-text">66 cm</strong></div>
+                            <div>Lebar Bahu: <strong class="font-bold text-brand-text">50 cm</strong></div>
+                            <div>Panjang Lengan: <strong class="font-bold text-brand-text">61 cm</strong></div>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Pesan Produk Unggulan -->
+                    <div class="flex gap-2.5">
+                        <button onclick="openOrderModal('Carhartt Detroit Jacket J97 (Rp 1.450.000)')" class="flex-1 bg-brand-text hover:bg-black text-white py-3 rounded-md text-sm font-semibold transition-colors text-center">
+                            Pesan Pakaian Ini (Hanya Ada 1)
+                        </button>
+                        <button onclick="openInspectModal('lot-108')" class="border border-brand-border hover:border-brand-text bg-white px-3.5 text-brand-text rounded-md transition-colors" title="Perbesar Foto Detail">
+                            <i class="ph ph-magnifying-glass-plus text-xl"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+         4. KOLEKSI PAKAIAN MINGGU INI (KATALOG JELAS)
+    =========================================== -->
+    <section id="koleksi-drop" class="max-w-[1320px] mx-auto border-b border-brand-border bg-brand-bg py-16 sm:py-20 px-4 sm:px-8">
+        
+        <!-- Judul Katalog & Pilihan Kategori -->
+        <div class="flex flex-col md:flex-row justify-between md:items-end gap-6 mb-10 pb-6 border-b border-brand-border reveal-on-scroll">
+            <div>
+                <span class="text-xs font-bold text-brand-accent uppercase tracking-wider block mb-1.5">
+                    Katalog Pilihan Siap Pakai
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-brand-text tracking-tight">
+                    Koleksi Pakaian Minggu Ini
+                </h2>
+                <p class="text-sm sm:text-base text-brand-text-muted mt-2 max-w-xl">
+                    Semua pakaian di bawah ini hanya ada satu potong (1-of-1). Ukuran diukur langsung di atas meja datar agar Anda tidak salah pilih.
+                </p>
+            </div>
+
+            <!-- Tombol Filter Kategori (Jelas & Nyaman Diklik) -->
+            <div class="flex flex-wrap gap-2 text-sm font-semibold" id="catalog-filter-container">
+                <button onclick="filterCatalog('all')" class="filter-pill-btn bg-brand-text text-white px-4 py-2 rounded-md border border-brand-text transition-all">
+                    Semua Pakaian (6)
+                </button>
+                <button onclick="filterCatalog('outerwear')" class="filter-pill-btn bg-white text-brand-text hover:border-brand-text px-4 py-2 rounded-md border border-brand-border transition-all">
+                    Jaket & Mantel (3)
+                </button>
+                <button onclick="filterCatalog('denim')" class="filter-pill-btn bg-white text-brand-text hover:border-brand-text px-4 py-2 rounded-md border border-brand-border transition-all">
+                    Jeans & Kanvas (2)
+                </button>
+                <button onclick="filterCatalog('knit')" class="filter-pill-btn bg-white text-brand-text hover:border-brand-text px-4 py-2 rounded-md border border-brand-border transition-all">
+                    Fleece Hangat (1)
+                </button>
+            </div>
+        </div>
+
+        <!-- Kisi-Kisi 6 Produk Pilihan (Teks Jelas & Huruf Besar) -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7" id="catalog-grid">
+            
+            <!-- Produk 1: Carhartt Detroit -->
+            <article class="catalog-item reveal-on-scroll reveal-delay-1 bg-white border border-brand-border rounded-lg p-5 hover:border-brand-text-muted transition-all shadow-card flex flex-col justify-between" data-category="outerwear denim">
+                <div>
+                    <!-- Foto dengan Transisi Close-up -->
+                    <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
+                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=80" 
+                             alt="Jaket Carhartt Detroit Hijau Lumut" 
+                             loading="lazy"
+                             class="img-reveal-target w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
+                            Nomor #108
+                        </div>
+                        <div class="absolute top-3 right-3 bg-white border border-brand-border text-brand-green font-bold text-xs px-2.5 py-1 rounded">
+                            Kondisi Bagus (9/10)
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-brand-text-soft font-medium mb-1">
+                        Bahan Kanvas Katun Tebal · Buatan Amerika Serikat
+                    </div>
+
+                    <h3 class="text-lg font-bold text-brand-text mb-2">
+                        Jaket Kanvas Carhartt Detroit
+                    </h3>
+
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-4">
+                        Warna hijau lumut klasik dengan lapisan kain wol hangat bermotif di bagian dalam. Ritsleting kuningan asli bekerja dengan sangat lancar.
+                    </p>
+
+                    <!-- Rincian Ukuran Sangat Terbaca (14px) -->
+                    <div class="bg-brand-surface p-3 rounded-md text-sm font-medium text-brand-text mb-5 grid grid-cols-2 gap-2 border border-brand-border/60">
+                        <div>Panjang: <strong>66 cm</strong></div>
+                        <div>Lebar Dada: <strong>62 cm (L–XL)</strong></div>
+                        <div>Lebar Bahu: <strong>50 cm</strong></div>
+                        <div>Panjang Lengan: <strong>61 cm</strong></div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-brand-text-soft block">Harga Barang:</span>
+                        <span class="text-lg font-extrabold text-brand-text">Rp 1.450.000</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="openInspectModal('lot-108')" class="p-2.5 border border-brand-border hover:border-brand-text bg-brand-surface text-brand-text rounded-md transition-colors" title="Lihat Foto Detail">
+                            <i class="ph ph-magnifying-glass text-lg"></i>
+                        </button>
+                        <button onclick="openOrderModal('Carhartt Detroit Jacket (Rp 1.450.000)')" class="bg-brand-text hover:bg-black text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors">
+                            Pesan Barang
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Produk 2: Issey Miyake Men Bomber -->
+            <article class="catalog-item reveal-on-scroll reveal-delay-2 bg-white border border-brand-border rounded-lg p-5 hover:border-brand-text-muted transition-all shadow-card flex flex-col justify-between" data-category="outerwear">
+                <div>
+                    <!-- Foto dengan Transisi Close-up -->
+                    <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
+                        <img src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1000&q=80" 
+                             alt="Jaket Bomber Issey Miyake Hijau Zaitun" 
+                             loading="lazy"
+                             class="img-reveal-target w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
+                            Nomor #109
+                        </div>
+                        <div class="absolute top-3 right-3 bg-white border border-brand-border text-brand-green font-bold text-xs px-2.5 py-1 rounded">
+                            Sangat Mulus (9.5/10)
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-brand-text-soft font-medium mb-1">
+                        Bahan Nilon Halus & Adem · Buatan Jepang
+                    </div>
+
+                    <h3 class="text-lg font-bold text-brand-text mb-2">
+                        Jaket Bomber Issey Miyake
+                    </h3>
+
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-4">
+                        Model bomber santai berwarna hijau zaitun. Bagian dalam berlapis kain halus yang sejuk di kulit saat dipakai bepergian.
+                    </p>
+
+                    <!-- Rincian Ukuran Sangat Terbaca (14px) -->
+                    <div class="bg-brand-surface p-3 rounded-md text-sm font-medium text-brand-text mb-5 grid grid-cols-2 gap-2 border border-brand-border/60">
+                        <div>Panjang: <strong>68 cm</strong></div>
+                        <div>Lebar Dada: <strong>65 cm (XL)</strong></div>
+                        <div>Lebar Bahu: <strong>54 cm</strong></div>
+                        <div>Panjang Lengan: <strong>63 cm</strong></div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-brand-text-soft block">Harga Barang:</span>
+                        <span class="text-lg font-extrabold text-brand-text">Rp 2.850.000</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="openInspectModal('lot-109')" class="p-2.5 border border-brand-border hover:border-brand-text bg-brand-surface text-brand-text rounded-md transition-colors" title="Lihat Foto Detail">
+                            <i class="ph ph-magnifying-glass text-lg"></i>
+                        </button>
+                        <button onclick="openOrderModal('Issey Miyake Bomber (Rp 2.850.000)')" class="bg-brand-text hover:bg-black text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors">
+                            Pesan Barang
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Produk 3: Patagonia Retro-X Fleece -->
+            <article class="catalog-item reveal-on-scroll reveal-delay-3 bg-white border border-brand-border rounded-lg p-5 hover:border-brand-text-muted transition-all shadow-card flex flex-col justify-between" data-category="knit">
+                <div>
+                    <!-- Foto dengan Transisi Close-up -->
+                    <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
+                        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1000&q=80" 
+                             alt="Jaket Fleece Tebal Patagonia Krem" 
+                             loading="lazy"
+                             class="img-reveal-target w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
+                            Nomor #110
+                        </div>
+                        <div class="absolute top-3 right-3 bg-white border border-brand-border text-brand-green font-bold text-xs px-2.5 py-1 rounded">
+                            Bulu Empuk (9/10)
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-brand-text-soft font-medium mb-1">
+                        Bahan Fleece Wol Sintetis · Tahan Angin Dingin
+                    </div>
+
+                    <h3 class="text-lg font-bold text-brand-text mb-2">
+                        Jaket Fleece Patagonia Retro-X
+                    </h3>
+
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-4">
+                        Warna krem lembut dengan saku dada warna ungu terung. Bulu fleece tebal dan empuk, sangat hangat dan nyaman untuk udara sejuk.
+                    </p>
+
+                    <!-- Rincian Ukuran Sangat Terbaca (14px) -->
+                    <div class="bg-brand-surface p-3 rounded-md text-sm font-medium text-brand-text mb-5 grid grid-cols-2 gap-2 border border-brand-border/60">
+                        <div>Panjang: <strong>70 cm</strong></div>
+                        <div>Lebar Dada: <strong>60 cm (L)</strong></div>
+                        <div>Model Bahu: <strong>Raglan Nyaman</strong></div>
+                        <div>Panjang Lengan: <strong>62 cm</strong></div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-brand-text-soft block">Harga Barang:</span>
+                        <span class="text-lg font-extrabold text-brand-text">Rp 1.850.000</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="openInspectModal('lot-110')" class="p-2.5 border border-brand-border hover:border-brand-text bg-brand-surface text-brand-text rounded-md transition-colors" title="Lihat Foto Detail">
+                            <i class="ph ph-magnifying-glass text-lg"></i>
+                        </button>
+                        <button onclick="openOrderModal('Patagonia Retro-X Fleece (Rp 1.850.000)')" class="bg-brand-text hover:bg-black text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors">
+                            Pesan Barang
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Produk 4: Levi's Selvedge Trucker -->
+            <article class="catalog-item reveal-on-scroll reveal-delay-1 bg-white border border-brand-border rounded-lg p-5 hover:border-brand-text-muted transition-all shadow-card flex flex-col justify-between" data-category="denim">
+                <div>
+                    <!-- Foto dengan Transisi Close-up -->
+                    <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
+                        <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1000&q=80" 
+                             alt="Jaket Jeans Levi's Asli Biru Klasik" 
+                             loading="lazy"
+                             class="img-reveal-target w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
+                            Nomor #111
+                        </div>
+                        <div class="absolute top-3 right-3 bg-white border border-brand-border text-brand-green font-bold text-xs px-2.5 py-1 rounded">
+                            Kondisi Terawat (9/10)
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-brand-text-soft font-medium mb-1">
+                        Bahan Denim Katun Murni 14oz · Buatan Amerika
+                    </div>
+
+                    <h3 class="text-lg font-bold text-brand-text mb-2">
+                        Jaket Jeans Levi's 70506 Asli
+                    </h3>
+
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-4">
+                        Warna biru jeans klasik dengan pemudaran alami yang rapi. Jahitan kuat dan tidak ada bagian yang sobek atau bolong.
+                    </p>
+
+                    <!-- Rincian Ukuran Sangat Terbaca (14px) -->
+                    <div class="bg-brand-surface p-3 rounded-md text-sm font-medium text-brand-text mb-5 grid grid-cols-2 gap-2 border border-brand-border/60">
+                        <div>Panjang: <strong>64 cm</strong></div>
+                        <div>Lebar Dada: <strong>56 cm (M–L)</strong></div>
+                        <div>Lebar Bahu: <strong>48 cm</strong></div>
+                        <div>Panjang Lengan: <strong>62 cm</strong></div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-brand-text-soft block">Harga Barang:</span>
+                        <span class="text-lg font-extrabold text-brand-text">Rp 1.650.000</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="openInspectModal('lot-111')" class="p-2.5 border border-brand-border hover:border-brand-text bg-brand-surface text-brand-text rounded-md transition-colors" title="Lihat Foto Detail">
+                            <i class="ph ph-magnifying-glass text-lg"></i>
+                        </button>
+                        <button onclick="openOrderModal('Levi\'s 70506 Trucker (Rp 1.650.000)')" class="bg-brand-text hover:bg-black text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors">
+                            Pesan Barang
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Produk 5: Yohji Yamamoto Wool Coat -->
+            <article class="catalog-item reveal-on-scroll reveal-delay-2 bg-white border border-brand-border rounded-lg p-5 hover:border-brand-text-muted transition-all shadow-card flex flex-col justify-between" data-category="outerwear">
+                <div>
+                    <!-- Foto dengan Transisi Close-up -->
+                    <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=1000&q=80" 
+                             alt="Mantel Panjang Bahan Wol Hangat" 
+                             loading="lazy"
+                             class="img-reveal-target w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
+                            Nomor #112
+                        </div>
+                        <div class="absolute top-3 right-3 bg-white border border-brand-border text-brand-green font-bold text-xs px-2.5 py-1 rounded">
+                            Seperti Baru (9.8/10)
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-brand-text-soft font-medium mb-1">
+                        100% Wol Tebal & Lembut · Buatan Jepang
+                    </div>
+
+                    <h3 class="text-lg font-bold text-brand-text mb-2">
+                        Mantel Panjang Wol Yohji Yamamoto
+                    </h3>
+
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-4">
+                        Mantel panjang warna abu arang gelap. Sangat hangat untuk perjalanan ke daerah dingin atau luar negeri. Kancing tanduk lengkap.
+                    </p>
+
+                    <!-- Rincian Ukuran Sangat Terbaca (14px) -->
+                    <div class="bg-brand-surface p-3 rounded-md text-sm font-medium text-brand-text mb-5 grid grid-cols-2 gap-2 border border-brand-border/60">
+                        <div>Panjang: <strong>112 cm</strong></div>
+                        <div>Lebar Dada: <strong>64 cm (L–XL)</strong></div>
+                        <div>Model Bahu: <strong>Bebas Gerak</strong></div>
+                        <div>Panjang Lengan: <strong>64 cm</strong></div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-brand-text-soft block">Harga Barang:</span>
+                        <span class="text-lg font-extrabold text-brand-text">Rp 3.200.000</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="openInspectModal('lot-112')" class="p-2.5 border border-brand-border hover:border-brand-text bg-brand-surface text-brand-text rounded-md transition-colors" title="Lihat Foto Detail">
+                            <i class="ph ph-magnifying-glass text-lg"></i>
+                        </button>
+                        <button onclick="openOrderModal('Yohji Yamamoto Wool Coat (Rp 3.200.000)')" class="bg-brand-text hover:bg-black text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors">
+                            Pesan Barang
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Produk 6: Schott Leather Chore -->
+            <article class="catalog-item reveal-on-scroll reveal-delay-3 bg-white border border-brand-border rounded-lg p-5 hover:border-brand-text-muted transition-all shadow-card flex flex-col justify-between" data-category="outerwear">
+                <div>
+                    <!-- Foto dengan Transisi Close-up -->
+                    <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1000&q=80" 
+                             alt="Jaket Kulit Asli Schott Tebal & Lembut" 
+                             loading="lazy"
+                             class="img-reveal-target w-full h-full object-cover">
+                        <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
+                            Nomor #113
+                        </div>
+                        <div class="absolute top-3 right-3 bg-white border border-brand-border text-brand-green font-bold text-xs px-2.5 py-1 rounded">
+                            Kulit Lentur (9/10)
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-brand-text-soft font-medium mb-1">
+                        Kulit Sapi Asli Alami · Buatan Amerika Serikat
+                    </div>
+
+                    <h3 class="text-lg font-bold text-brand-text mb-2">
+                        Jaket Kulit Asli Schott NYC
+                    </h3>
+
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-4">
+                        Kulit sapi asli yang sudah lemas dan nyaman dipakai, tidak kaku di pundak. Memiliki 4 saku depan yang praktis untuk dompet dan kacamata.
+                    </p>
+
+                    <!-- Rincian Ukuran Sangat Terbaca (14px) -->
+                    <div class="bg-brand-surface p-3 rounded-md text-sm font-medium text-brand-text mb-5 grid grid-cols-2 gap-2 border border-brand-border/60">
+                        <div>Panjang: <strong>72 cm</strong></div>
+                        <div>Lebar Dada: <strong>59 cm (L)</strong></div>
+                        <div>Lebar Bahu: <strong>51 cm</strong></div>
+                        <div>Panjang Lengan: <strong>63 cm</strong></div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div>
+                        <span class="text-xs text-brand-text-soft block">Harga Barang:</span>
+                        <span class="text-lg font-extrabold text-brand-text">Rp 2.650.000</span>
+                    </div>
+                    <div class="flex gap-2">
+                        <button onclick="openInspectModal('lot-113')" class="p-2.5 border border-brand-border hover:border-brand-text bg-brand-surface text-brand-text rounded-md transition-colors" title="Lihat Foto Detail">
+                            <i class="ph ph-magnifying-glass text-lg"></i>
+                        </button>
+                        <button onclick="openOrderModal('Schott Leather Chore (Rp 2.650.000)')" class="bg-brand-text hover:bg-black text-white text-sm font-semibold px-4 py-2.5 rounded-md transition-colors">
+                            Pesan Barang
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         5. CARA KAMI MEMBERSIHKAN PAKAIAN
+    =========================================== -->
+    <section id="cara-pembersihan" class="max-w-[1320px] mx-auto border-b border-brand-border bg-brand-surface/40 py-16 sm:py-20 px-4 sm:px-8">
+        
+        <div class="max-w-3xl mb-12 reveal-on-scroll">
+            <span class="text-xs font-bold text-brand-green uppercase tracking-wider block mb-1.5">
+                Standar Kebersihan & Kenyamanan
+            </span>
+            <h2 class="text-2xl sm:text-4xl font-extrabold text-brand-text tracking-tight mb-3">
+                Bagaimana Kami Memastikan Pakaian Bersih dan Higienis?
+            </h2>
+            <p class="text-base text-brand-text-muted leading-relaxed">
+                Kami memahami kekhawatiran saat membeli pakaian bekas. Karena itu, setiap pakaian yang tiba di studio kami wajib melalui 4 langkah perawatan ketat berikut:
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="cleaning-steps-grid">
+            
+            <!-- Langkah 1 -->
+            <div class="bg-white border border-brand-border p-6 rounded-lg shadow-card reveal-on-scroll reveal-delay-1">
+                <span class="text-3xl font-extrabold text-brand-accent block mb-2">01</span>
+                <h3 class="text-lg font-bold text-brand-text mb-2">Pemeriksaan Keaslian</h3>
+                <p class="text-sm text-brand-text-muted leading-relaxed">
+                    Kami memeriksa label merek, nomor seri produksi, kualitas kancing, dan ritsleting. Jika ada noda kecil atau kancing yang diperbaiki, kami jelaskan di awal secara jujur.
+                </p>
+            </div>
+
+            <!-- Langkah 2 -->
+            <div class="bg-white border border-brand-border p-6 rounded-lg shadow-card reveal-on-scroll reveal-delay-2">
+                <span class="text-3xl font-extrabold text-brand-green block mb-2">02</span>
+                <h3 class="text-lg font-bold text-brand-text mb-2">Pencucian & Uap Panas</h3>
+                <p class="text-sm text-brand-text-muted leading-relaxed">
+                    Pakaian dicuci dengan sabun khusus ramah kain, dilanjutkan sterilisasi uap murni 120°C untuk mematikan kuman dan menghilangkan aroma apek lemari tua.
+                </p>
+            </div>
+
+            <!-- Langkah 3 -->
+            <div class="bg-white border border-brand-border p-6 rounded-lg shadow-card reveal-on-scroll reveal-delay-3">
+                <span class="text-3xl font-extrabold text-brand-text block mb-2">03</span>
+                <h3 class="text-lg font-bold text-brand-text mb-2">Pengukuran Meteran Nyata</h3>
+                <p class="text-sm text-brand-text-muted leading-relaxed">
+                    Ukuran baju lama sering berbeda dengan ukuran sekarang. Kami mengukur panjang dan lebar dada secara manual dalam satuan sentimeter (cm) di atas meja datar.
+                </p>
+            </div>
+
+            <!-- Langkah 4 -->
+            <div class="bg-white border border-brand-border p-6 rounded-lg shadow-card reveal-on-scroll reveal-delay-4">
+                <span class="text-3xl font-extrabold text-brand-text-soft block mb-2">04</span>
+                <h3 class="text-lg font-bold text-brand-text mb-2">Foto Asli Tanpa Efek</h3>
+                <p class="text-sm text-brand-text-muted leading-relaxed">
+                    Semua foto diambil di bawah cahaya studio yang jernih dan netral. Warna yang Anda lihat di layar komputer atau ponsel sama dengan barang yang Anda terima di rumah.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         6. PANDUAN KONDISI BARANG (KAMUS SEDERHANA)
+    =========================================== -->
+    <section id="panduan-kondisi" class="max-w-[1320px] mx-auto border-b border-brand-border bg-brand-bg py-16 sm:py-20 px-4 sm:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <div class="lg:col-span-5 reveal-on-scroll">
+                <span class="text-xs font-bold text-brand-accent uppercase tracking-wider block mb-1.5">
+                    Keterangan Kondisi Barang
+                </span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-brand-text tracking-tight mb-4">
+                    Panduan Sederhana Mengetahui Kondisi Pakaian
+                </h2>
+                <p class="text-base text-brand-text-muted leading-relaxed mb-6">
+                    Membeli pakaian vintage berarti menikmati pakaian yang sudah memiliki karakter dan terbukti tahan bertahun-tahun. Kami mengelompokkan kondisi pakaian secara sederhana:
+                </p>
+
+                <div class="p-4 bg-brand-surface border border-brand-border rounded-lg text-sm text-brand-text space-y-2 font-medium">
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-check-circle text-lg text-brand-green"></i>
+                        <span>Jika ada cacat kecil, pasti kami foto dari dekat dan jelaskan.</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="ph ph-arrow-counter-clockwise text-lg text-brand-accent"></i>
+                        <span>Garansi uang kembali jika ada cacat besar yang terlewat oleh kami.</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kartu Penjelasan Kondisi (Font Jelas & Terbaca) -->
+            <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                
+                <div class="bg-white border border-brand-border p-5 rounded-lg shadow-sm reveal-on-scroll reveal-delay-1">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-lg font-bold text-brand-text">Kondisi Seperti Baru</span>
+                        <span class="text-xs font-semibold bg-brand-green-bg text-brand-green px-2 py-0.5 rounded">9.5–10 / 10</span>
+                    </div>
+                    <p class="text-sm text-brand-text-muted leading-relaxed">
+                        Hampir tidak ada tanda-tanda pernah dipakai. Warna kain masih pekat, tidak ada bulu rontok, kancing dan resleting masih berkilau bersih.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-brand-border p-5 rounded-lg shadow-sm reveal-on-scroll reveal-delay-2">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-lg font-bold text-brand-text">Kondisi Sangat Bagus</span>
+                        <span class="text-xs font-semibold bg-brand-surface text-brand-text px-2 py-0.5 rounded">9 / 10</span>
+                    </div>
+                    <p class="text-sm text-brand-text-muted leading-relaxed">
+                        Jejak pemakaian sangat sedikit dan terawat baik. Kain masih tebal dan kuat, bersih, serta jahitan sambungan utuh tanpa kerusakan.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-brand-border p-5 rounded-lg shadow-sm reveal-on-scroll reveal-delay-3">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-lg font-bold text-brand-text">Kondisi Vintage Alami</span>
+                        <span class="text-xs font-semibold bg-brand-surface text-brand-text px-2 py-0.5 rounded">8.5 / 10</span>
+                    </div>
+                    <p class="text-sm text-brand-text-muted leading-relaxed">
+                        Ada pemudaran warna alami yang rapi (misalnya di lipatan jaket jeans atau kerah). Justru memberikan kesan klasik yang elegan dan tidak pasaran.
+                    </p>
+                </div>
+
+                <div class="bg-white border border-brand-border p-5 rounded-lg shadow-sm reveal-on-scroll reveal-delay-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-lg font-bold text-brand-text">Kondisi Khas Pemakaian</span>
+                        <span class="text-xs font-semibold bg-brand-surface text-brand-text px-2 py-0.5 rounded">8 / 10</span>
+                    </div>
+                    <p class="text-sm text-brand-text-muted leading-relaxed">
+                        Pakaian kerja bersejarah dengan jejak pemakaian otentik seperti ujung kain yang agak berbulu halus atau bekas jahitan perbaikan rapi.
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         7. TENTANG KAMI & NILAI KAMI
+    =========================================== -->
+    <section id="tentang-kami" class="max-w-[1320px] mx-auto border-b border-brand-border bg-brand-bg py-16 sm:py-20 px-4 sm:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            <!-- Foto Studio dengan Efek Close-Up -->
+            <div class="lg:col-span-5 order-2 lg:order-1 reveal-on-scroll">
+                <div class="img-reveal-wrapper rounded-lg aspect-[4/5] border border-brand-border shadow-card">
+                    <img src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1000&q=80" 
+                         alt="Suasana Studio RE-WEAR di Cipete Jakarta Selatan" 
+                         loading="lazy"
+                         class="img-reveal-target w-full h-full object-cover">
+                </div>
+                <p class="text-xs font-medium text-brand-text-soft mt-3 text-center">
+                    Studio Perawatan & Pemeriksaan Pakaian RE—WEAR · Cipete, Jakarta Selatan
+                </p>
+            </div>
+
+            <!-- Teks Tentang Kami yang Alami & Santun -->
+            <div class="lg:col-span-7 order-1 lg:order-2 space-y-5 reveal-on-scroll reveal-delay-2">
+                <span class="text-xs font-bold text-brand-green uppercase tracking-wider block">
+                    Tentang Studio Kami
+                </span>
+
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-brand-text tracking-tight leading-tight">
+                    Mengapa Memilih Pakaian yang Sudah Terbukti Awet?
+                </h2>
+
+                <div class="space-y-4 text-base text-brand-text-muted leading-relaxed">
+                    <p>
+                        Banyak pakaian baru zaman sekarang dibuat dari bahan tipis yang mudah melar atau rusak setelah beberapa kali dicuci. Di <strong>RE—WEAR</strong>, kami percaya pakaian berkualitas dari masa lalu justru memiliki daya tahan yang jauh lebih baik.
+                    </p>
+                    <p>
+                        Pakaian dari era 80-an hingga 90-an dibuat dengan kain katun yang padat, benang pintal yang rapat, kancing logam tebal, dan jahitan berlapis yang dirancang untuk dipakai bertahun-tahun.
+                    </p>
+                    <p>
+                        Dengan memilih pakaian yang sudah ada, kita bukan saja mendapatkan pakaian yang nyaman dan bernilai seni tinggi, tetapi juga ikut menjaga lingkungan dengan mengurangi limbah pakaian sekali pakai.
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-brand-border flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full overflow-hidden border border-brand-border flex-shrink-0">
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=200&q=80" alt="Farhan - Kurator Pakaian" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-brand-text text-base">Farhan & Tim Kurasi</h4>
+                        <p class="text-xs text-brand-text-soft">Pengelola Studio RE—WEAR · Jakarta & Bandung</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ==========================================
+         8. ULASAN DARI PELANGGAN (BAHASA ALAMI)
+    =========================================== -->
+    <section class="max-w-[1320px] mx-auto border-b border-brand-border bg-brand-surface/30 py-16 sm:py-20 px-4 sm:px-8">
+        
+        <div class="max-w-3xl mb-10 reveal-on-scroll">
+            <span class="text-xs font-bold text-brand-accent uppercase tracking-wider block mb-1.5">
+                Pengalaman Nyata Pembeli
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-text tracking-tight mb-2">
+                Apa Kata Pelanggan Kami?
+            </h2>
+            <p class="text-sm sm:text-base text-brand-text-muted">
+                Kesan asli dari para pembeli yang sudah mencoba pakaian kurasi kami:
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            
+            <div class="bg-white border border-brand-border p-6 rounded-lg shadow-card flex flex-col justify-between reveal-on-scroll reveal-delay-1">
+                <div>
+                    <div class="flex justify-between items-center text-xs text-brand-text-soft mb-3 pb-2 border-b border-gray-100">
+                        <span class="font-semibold text-brand-text">Pembeli Jaket Kanvas</span>
+                        <span class="text-amber-500 font-bold">★★★★★</span>
+                    </div>
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-4">
+                        "Awalnya ragu beli baju bekas lewat online karena takut bau apek atau ukurannya beda. Ternyata jaketnya datang bersih sekali, wangi segar, dan ukuran lebarnya pas persis dengan ukuran meteran di rumah."
+                    </p>
+                </div>
+                <div class="text-xs text-brand-text-soft pt-2 border-t border-gray-100 font-medium">
+                    <strong class="text-brand-text">Bapak Dimas W. (48 thn)</strong> · Jakarta Selatan
+                </div>
+            </div>
+
+            <div class="bg-white border border-brand-border p-6 rounded-lg shadow-card flex flex-col justify-between reveal-on-scroll reveal-delay-2">
+                <div>
+                    <div class="flex justify-between items-center text-xs text-brand-text-soft mb-3 pb-2 border-b border-gray-100">
+                        <span class="font-semibold text-brand-text">Pembeli Jaket Jeans</span>
+                        <span class="text-amber-500 font-bold">★★★★★</span>
+                    </div>
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-4">
+                        "Foto di layar hp sama persis dengan jaket aslinya saat kurir datang. Jahitannya rapi dan kain jeansnya terasa tebal tapi tidak kaku. Pelayanan admin WhatsApp-nya juga sangat ramah dan sopan."
+                    </p>
+                </div>
+                <div class="text-xs text-brand-text-soft pt-2 border-t border-gray-100 font-medium">
+                    <strong class="text-brand-text">Ibu Anindya P.</strong> · Bandung
+                </div>
+            </div>
+
+            <div class="bg-white border border-brand-border p-6 rounded-lg shadow-card flex flex-col justify-between reveal-on-scroll reveal-delay-3">
+                <div>
+                    <div class="flex justify-between items-center text-xs text-brand-text-soft mb-3 pb-2 border-b border-gray-100">
+                        <span class="font-semibold text-brand-text">Pembeli Mantel Wol</span>
+                        <span class="text-amber-500 font-bold">★★★★★</span>
+                    </div>
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-4">
+                        "Mantel wolnya sangat hangat dan kondisinya bersih seperti barang simpanan baru. Ukuran panjangnya sesuai deskripsi. Pengiriman cepat dan dikemas dengan rapi menggunakan kantong pelindung."
+                    </p>
+                </div>
+                <div class="text-xs text-brand-text-soft pt-2 border-t border-gray-100 font-medium">
+                    <strong class="text-brand-text">Reza Gunawan</strong> · Surabaya
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         9. TANYA JAWAB (FAQ RAMAH & LENGKAP)
+    =========================================== -->
+    <section id="tanya-jawab" class="max-w-[1320px] mx-auto border-b border-brand-border bg-brand-bg py-16 sm:py-20 px-4 sm:px-8">
+        
+        <div class="max-w-3xl mb-10 reveal-on-scroll">
+            <span class="text-xs font-bold text-brand-green uppercase tracking-wider block mb-1.5">
+                Pertanyaan yang Sering Diajukan
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-text tracking-tight mb-2">
+                Jawaban untuk Pertanyaan Anda
+            </h2>
+            <p class="text-sm sm:text-base text-brand-text-muted">
+                Berikut adalah hal-hal yang paling sering ditanyakan pelanggan sebelum membeli:
+            </p>
+        </div>
+
+        <div class="max-w-3xl space-y-3.5">
+            
+            <!-- FAQ 1 -->
+            <div class="border border-brand-border rounded-lg bg-white overflow-hidden shadow-sm reveal-on-scroll reveal-delay-1">
+                <button onclick="toggleFaq('faq-1')" class="w-full p-5 text-left flex justify-between items-center text-base font-bold text-brand-text hover:bg-brand-surface transition-colors">
+                    <span>1. Bagaimana jika ukurannya ternyata tidak pas di badan saya?</span>
+                    <i id="faq-icon-1" class="ph ph-plus text-lg text-brand-text-soft"></i>
+                </button>
+                <div id="faq-1" class="hidden p-5 pt-0 text-sm sm:text-base text-brand-text-muted leading-relaxed border-t border-gray-100 bg-white">
+                    Setiap pakaian sudah kami ukur panjang dan lebar dadanya dalam sentimeter (cm). Sebaiknya Anda mengukur baju favorit Anda di rumah terlebih dahulu. Namun jika setelah dicoba di rumah ternyata ukurannya kurang cocok, Anda dapat menukarnya dengan pakaian lain atau saldo belanja dalam waktu 2 hari setelah barang sampai.
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="border border-brand-border rounded-lg bg-white overflow-hidden shadow-sm reveal-on-scroll reveal-delay-2">
+                <button onclick="toggleFaq('faq-2')" class="w-full p-5 text-left flex justify-between items-center text-base font-bold text-brand-text hover:bg-brand-surface transition-colors">
+                    <span>2. Apakah pakaiannya harus dicuci lagi saat sampai di rumah?</span>
+                    <i id="faq-icon-2" class="ph ph-plus text-lg text-brand-text-soft"></i>
+                </button>
+                <div id="faq-2" class="hidden p-5 pt-0 text-sm sm:text-base text-brand-text-muted leading-relaxed border-t border-gray-100 bg-white">
+                    Tidak perlu dicuci ulang. Semua pakaian sudah dicuci bersih dengan sabun khusus dan disterilkan menggunakan uap panas 120°C di studio kami. Pakaian dikemas dalam keadaan bersih, harum, dan siap langsung Anda pakai.
+                </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="border border-brand-border rounded-lg bg-white overflow-hidden shadow-sm reveal-on-scroll reveal-delay-3">
+                <button onclick="toggleFaq('faq-3')" class="w-full p-5 text-left flex justify-between items-center text-base font-bold text-brand-text hover:bg-brand-surface transition-colors">
+                    <span>3. Bagaimana cara memesan dan membayar?</span>
+                    <i id="faq-icon-3" class="ph ph-plus text-lg text-brand-text-soft"></i>
+                </button>
+                <div id="faq-3" class="hidden p-5 pt-0 text-sm sm:text-base text-brand-text-muted leading-relaxed border-t border-gray-100 bg-white">
+                    Sangat mudah! Anda cukup menekan tombol "Pesan Barang" pada pakaian yang diinginkan atau mengisi form singkat di website. Setelah itu, sistem kami akan menghubungkan Anda langsung ke WhatsApp resmi kami. Pembayaran dapat dilakukan melalui transfer bank (BCA, Mandiri, BRI, BNI) atau dompet digital.
+                </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="border border-brand-border rounded-lg bg-white overflow-hidden shadow-sm reveal-on-scroll reveal-delay-4">
+                <button onclick="toggleFaq('faq-4')" class="w-full p-5 text-left flex justify-between items-center text-base font-bold text-brand-text hover:bg-brand-surface transition-colors">
+                    <span>4. Berapa lama pengiriman barang sampai ke rumah saya?</span>
+                    <i id="faq-icon-4" class="ph ph-plus text-lg text-brand-text-soft"></i>
+                </button>
+                <div id="faq-4" class="hidden p-5 pt-0 text-sm sm:text-base text-brand-text-muted leading-relaxed border-t border-gray-100 bg-white">
+                    Untuk wilayah Jabodetabek dan Bandung, pesanan yang dikonfirmasi sebelum jam 15.00 WIB bisa dikirim hari itu juga dengan kurir instan/same-day. Untuk kota lain di seluruh Indonesia, kami mengirim via JNE atau SiCepat dengan estimasi 1 hingga 3 hari kerja dan dilengkapi asuransi pengiriman penuh.
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         10. BANNER KONSULTASI & PEMESANAN
+    =========================================== -->
+    <section class="max-w-[1320px] mx-auto border-b border-brand-border bg-brand-primary text-white py-16 px-4 sm:px-8 text-center rounded-none">
+        
+        <div class="max-w-2xl mx-auto space-y-5 reveal-on-scroll">
+            <span class="inline-block text-xs font-semibold px-3 py-1 bg-white/10 text-emerald-300 rounded-full">
+                Layanan Pelanggan Siap Membantu
+            </span>
+
+            <h2 class="text-2xl sm:text-4xl font-extrabold leading-tight tracking-tight">
+                Ingin Bertanya Ukuran atau Memesan Langsung?
+            </h2>
+
+            <p class="text-sm sm:text-base text-gray-200 leading-relaxed">
+                Setiap pakaian hanya tersedia satu buah. Jangan ragu menghubungi tim kami jika Anda membutuhkan panduan ukuran atau foto tambahan.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center gap-3.5 pt-3">
+                <button onclick="openOrderModal()" class="bg-white hover:bg-brand-surface text-brand-text text-sm font-bold px-7 py-3.5 rounded-md transition-colors shadow-sm">
+                    Isi Formulir Pemesanan
+                </button>
+                <a href="https://wa.me/6281234567890?text=Halo%20RE-WEAR,%20saya%20ingin%20bertanya%20tentang%20pakaian" target="_blank" class="border border-white/40 hover:border-white text-white text-sm font-semibold px-7 py-3.5 rounded-md transition-colors inline-flex items-center justify-center gap-2">
+                    <i class="ph ph-whatsapp-logo text-lg text-white"></i>
+                    <span>Tanya Langsung di WhatsApp</span>
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ==========================================
+         11. BAGIAN BAWAH / FOOTER
+    =========================================== -->
+    <footer class="max-w-[1320px] mx-auto bg-brand-bg py-12 px-4 sm:px-8 text-sm text-brand-text-muted">
+        
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 pb-10 border-b border-brand-border">
+            
+            <div class="md:col-span-5 space-y-3">
+                <span class="font-extrabold text-2xl tracking-tight text-brand-text block">RE—WEAR</span>
+                <p class="text-sm leading-relaxed max-w-sm text-brand-text-soft">
+                    Toko kurasi pakaian pre-loved dan vintage terpercaya. Mengutamakan kebersihan higienis, keaslian barang 100%, dan transparansi ukuran demi kenyamanan Anda.
+                </p>
+                <div class="text-xs text-brand-text-soft space-y-1 pt-1 font-medium">
+                    <p>📍 Studio 1: Jl. Cipete Raya No. 14, Jakarta Selatan</p>
+                    <p>📍 Studio 2: Jl. Trunojoyo No. 22, Bandung</p>
+                </div>
+            </div>
+
+            <div class="md:col-span-3 space-y-2.5 text-sm font-semibold">
+                <span class="text-xs text-brand-text font-bold uppercase block mb-1">Halaman Utama</span>
+                <a href="#koleksi-drop" class="block hover:text-brand-text transition-colors">Koleksi Pakaian</a>
+                <a href="#cara-pembersihan" class="block hover:text-brand-text transition-colors">Cara Pembersihan</a>
+                <a href="#panduan-kondisi" class="block hover:text-brand-text transition-colors">Panduan Kondisi</a>
+                <a href="#tentang-kami" class="block hover:text-brand-text transition-colors">Tentang Kami</a>
+                <a href="#tanya-jawab" class="block hover:text-brand-text transition-colors">Tanya Jawab (FAQ)</a>
+            </div>
+
+            <div class="md:col-span-4 space-y-2 text-sm">
+                <span class="text-xs text-brand-text font-bold uppercase block mb-1">Hubungi Kami</span>
+                <p class="text-brand-text font-bold">WhatsApp: +62 812-XXXX-XXXX</p>
+                <p class="text-brand-text-soft">Email: info@re-wear.id</p>
+                <p class="text-brand-text-soft text-xs">Jam Buka: Setiap Hari (10.00 – 21.00 WIB)</p>
+                <div class="pt-2 flex gap-4 text-xl text-brand-text">
+                    <a href="#" class="hover:text-brand-accent transition-colors" title="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    <a href="#" class="hover:text-brand-accent transition-colors" title="WhatsApp"><i class="ph ph-whatsapp-logo"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-brand-text-soft gap-2">
+            <div>© 2026 RE—WEAR Studio Pakaian Berkualitas. Hak Cipta Dilindungi.</div>
+            <div class="flex gap-4 font-medium">
+                <span>100% Original</span>
+                <span>·</span>
+                <span>Dicuci Uap 120°C</span>
+                <span>·</span>
+                <span>Garansi Pengembalian</span>
+            </div>
+        </div>
+
+    </footer>
+
+
+    <!-- ==========================================
+         12. MODAL INSPEKSI FOTO DETAIL (MEMBESAR RAPI)
+    =========================================== -->
+    <div id="macro-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden" onclick="handleMacroBackdropClick(event)">
+        <div class="bg-white border border-brand-border rounded-lg max-w-4xl w-full max-h-[92vh] overflow-y-auto shadow-modal" onclick="event.stopPropagation()">
+            
+            <div class="p-5 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white/95 backdrop-blur-sm z-10">
+                <div class="flex items-center gap-2.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-brand-green"></span>
+                    <h3 id="macro-modal-title" class="text-lg font-bold text-brand-text">Foto Rincian & Ukuran Pakaian</h3>
+                </div>
+                <button onclick="closeInspectModal()" class="text-brand-text-soft hover:text-brand-text p-2 text-2xl font-bold" aria-label="Tutup Tampilan">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+
+            <div class="p-6 grid grid-cols-1 md:grid-cols-12 gap-7">
+                
+                <div class="md:col-span-7">
+                    <div id="macro-lens-container" class="img-reveal-wrapper rounded-md aspect-[4/3] border border-brand-border lens-container relative">
+                        <img id="macro-modal-img" 
+                             src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Detail Bahan Pakaian" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    
+                    <p class="text-xs text-brand-text-soft text-center mt-2.5 flex items-center justify-center gap-1.5 font-medium">
+                        <i class="ph ph-cursor text-sm"></i> Sentuh atau arahkan kursor ke foto untuk memperbesar serat kain.
+                    </p>
+
+                    <!-- Tombol Sudut Foto di Modal -->
+                    <div class="grid grid-cols-3 gap-2 mt-4 text-xs font-semibold">
+                        <button onclick="changeMacroView(0)" id="macro-btn-0" class="macro-tab-btn border border-brand-text bg-brand-text text-white py-2 rounded text-center">
+                            1. Foto Utuh
+                        </button>
+                        <button onclick="changeMacroView(1)" id="macro-btn-1" class="macro-tab-btn border border-brand-border bg-brand-surface text-brand-text hover:border-brand-text py-2 rounded text-center">
+                            2. Serat Kain
+                        </button>
+                        <button onclick="changeMacroView(2)" id="macro-btn-2" class="macro-tab-btn border border-brand-border bg-brand-surface text-brand-text hover:border-brand-text py-2 rounded text-center">
+                            3. Kancing & Tag
+                        </button>
+                    </div>
+                </div>
+
+                <div class="md:col-span-5 flex flex-col justify-between space-y-5">
+                    <div>
+                        <div class="inline-block bg-brand-surface border border-brand-border px-2.5 py-0.5 text-xs font-bold text-brand-text rounded mb-2" id="macro-modal-lot">
+                            Nomor #108
+                        </div>
+                        <h4 id="macro-modal-name" class="text-2xl font-bold text-brand-text mb-1">
+                            Jaket Kanvas Carhartt Detroit
+                        </h4>
+                        <p id="macro-modal-price" class="text-xl font-extrabold text-brand-accent mb-4">
+                            Rp 1.450.000
+                        </p>
+                        
+                        <p id="macro-modal-desc" class="text-sm text-brand-text-muted leading-relaxed mb-5">
+                            Warna hijau lumut dengan lapisan kain selimut wol yang nyaman. Semua jahitan saku dan ritsleting telah dicek dalam kondisi siap pakai.
+                        </p>
+
+                        <!-- Tabel Ukuran Jelas -->
+                        <div class="border border-brand-border rounded-md bg-brand-surface p-4 space-y-2 text-sm text-brand-text font-medium">
+                            <span class="text-xs text-brand-text-soft block font-bold uppercase">Hasil Pengukuran Meteran (cm):</span>
+                            <div class="flex justify-between border-b border-gray-200 pb-1.5">
+                                <span>Lebar Dada (Ketiak ke Ketiak):</span>
+                                <strong id="macro-spec-ptp" class="font-bold">62 cm</strong>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-200 pb-1.5">
+                                <span>Panjang Jaket (Kerah ke Bawah):</span>
+                                <strong id="macro-spec-length" class="font-bold">66 cm</strong>
+                            </div>
+                            <div class="flex justify-between border-b border-gray-200 pb-1.5">
+                                <span>Lebar Bahu:</span>
+                                <strong id="macro-spec-shoulder" class="font-bold">50 cm</strong>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Panjang Lengan:</span>
+                                <strong id="macro-spec-sleeve" class="font-bold">61 cm</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <button id="macro-modal-order-btn" onclick="orderFromMacro()" class="w-full bg-brand-text hover:bg-black text-white py-3.5 text-sm font-bold rounded-md transition-colors text-center">
+                            Pesan Pakaian Ini Sekarang
+                        </button>
+                        <p class="text-xs text-brand-text-soft text-center font-medium">
+                            Garansi keaslian uang kembali penuh jika tidak original.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         13. FORMULIR PEMESANAN PRAKTIS & MUDAH
+    =========================================== -->
+    <div id="order-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden" onclick="handleOrderBackdropClick(event)">
+        
+        <div class="bg-white border border-brand-border rounded-lg max-w-lg w-full shadow-modal overflow-hidden" onclick="event.stopPropagation()">
+            
+            <div class="p-5 border-b border-gray-100 bg-brand-surface flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-brand-accent"></span>
+                    <span class="text-lg font-bold text-brand-text">Formulir Pemesanan Pakaian</span>
+                </div>
+                <button onclick="closeOrderModal()" class="text-brand-text-soft hover:text-brand-text text-2xl font-bold">
+                    <i class="ph ph-x"></i>
+                </button>
+            </div>
+
+            <div class="p-6">
+                
+                <div id="order-form-container">
+                    <p class="text-sm text-brand-text-muted leading-relaxed mb-5">
+                        Silakan isi data ringkas di bawah ini untuk memesan. Tim kami akan segera menyiapkan pesanan dan mengirimkan bukti pemesanan melalui WhatsApp.
+                    </p>
+
+                    <form id="checkout-form" onsubmit="handleFormSubmission(event)" class="space-y-4">
+                        
+                        <!-- Pilihan Pakaian -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-text mb-1">Pilihan Pakaian:</label>
+                            <select id="checkout-item-select" required class="w-full border border-brand-border bg-white p-3 text-sm font-semibold text-brand-text rounded-md focus:outline-none focus:border-brand-text">
+                                <option value="Carhartt Detroit Jacket (Rp 1.450.000)">Jaket Carhartt Detroit (Rp 1.450.000)</option>
+                                <option value="Issey Miyake Bomber (Rp 2.850.000)">Jaket Bomber Issey Miyake (Rp 2.850.000)</option>
+                                <option value="Patagonia Retro-X Fleece (Rp 1.850.000)">Jaket Fleece Patagonia (Rp 1.850.000)</option>
+                                <option value="Levi's 70506 Trucker (Rp 1.650.000)">Jaket Jeans Levi's 70506 (Rp 1.650.000)</option>
+                                <option value="Yohji Yamamoto Wool Coat (Rp 3.200.000)">Mantel Wol Yohji Yamamoto (Rp 3.200.000)</option>
+                                <option value="Schott Leather Chore (Rp 2.650.000)">Jaket Kulit Asli Schott (Rp 2.650.000)</option>
+                            </select>
+                        </div>
+
+                        <!-- Nama Lengkap -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-text mb-1">Nama Lengkap Anda:</label>
+                            <input type="text" required id="cust-name" placeholder="Contoh: Raditya Pratama" class="w-full border border-brand-border bg-white p-3 text-base text-brand-text rounded-md focus:outline-none focus:border-brand-text">
+                        </div>
+
+                        <!-- Nomor WhatsApp -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-text mb-1">Nomor WhatsApp Aktif:</label>
+                            <input type="tel" required id="cust-wa" placeholder="0812-XXXX-XXXX" class="w-full border border-brand-border bg-white p-3 text-base text-brand-text rounded-md focus:outline-none focus:border-brand-text">
+                        </div>
+
+                        <!-- Kota Pengiriman -->
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-brand-text mb-1">Kota atau Kecamatan Tujuan:</label>
+                            <input type="text" required id="cust-city" placeholder="Contoh: Jakarta Selatan / Kebayoran Baru" class="w-full border border-brand-border bg-white p-3 text-base text-brand-text rounded-md focus:outline-none focus:border-brand-text">
+                        </div>
+
+                        <!-- Tombol Konfirmasi -->
+                        <button type="submit" class="w-full bg-brand-text hover:bg-black text-white text-base font-bold py-3.5 rounded-md transition-colors shadow-sm">
+                            Konfirmasi Pesanan & Kirim ke WhatsApp →
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Layar Sukses -->
+                <div id="order-success-container" class="hidden text-center py-6 space-y-4">
+                    <i class="ph ph-check-circle text-5xl text-neutral-800"></i>
+                    <h3 class="text-2xl font-extrabold text-brand-text">Pemesanan Berhasil Diterima!</h3>
+                    <p class="text-sm text-brand-text-muted max-w-sm mx-auto leading-relaxed">
+                        Pakaian pilihan Anda telah disimpan sementara untuk Anda. Silakan klik tombol di bawah untuk mengirim detail pesanan ke WhatsApp admin kami.
+                    </p>
+                    
+                    <div class="bg-brand-surface border border-brand-border p-3.5 rounded-md text-sm text-brand-text font-semibold">
+                        Kode Pesanan Anda: <span id="confirmed-order-code" class="font-extrabold text-brand-accent">#REW-84291</span>
+                    </div>
+
+                    <div class="pt-2 flex flex-col gap-2">
+                        <a id="wa-direct-link" href="#" target="_blank" class="w-full bg-neutral-900 hover:bg-black text-white py-3.5 text-sm font-bold rounded-md transition-colors flex items-center justify-center gap-2 shadow-sm">
+                            <i class="ph ph-whatsapp-logo text-lg"></i>
+                            <span>Lanjut Chat ke WhatsApp Admin</span>
+                        </a>
+                        <button onclick="closeOrderModal()" class="text-sm font-medium text-brand-text-soft hover:text-brand-text py-2">
+                            Tutup Jendela Ini
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ==========================================
+         14. JAVASCRIPT LOGIC
+    =========================================== -->
+    <script>
+        // -----------------------------------------------------------
+        // 1. FLUID CLOSE-UP & LAYOUT REVEAL ON SCROLL
+        // -----------------------------------------------------------
+        document.addEventListener('DOMContentLoaded', () => {
+            // A. Gambar Close-up Reveal
+            const revealWrappers = document.querySelectorAll('.img-reveal-wrapper');
+            const imgObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -30px 0px'
+            });
+            revealWrappers.forEach(wrap => imgObserver.observe(wrap));
+
+            // B. Layout & Konten Fluid Reveal Saat Scroll
+            const scrollElements = document.querySelectorAll('.reveal-on-scroll');
+            const contentObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.08,
+                rootMargin: '0px 0px -40px 0px'
+            });
+            scrollElements.forEach(el => contentObserver.observe(el));
+
+            // Munculkan langsung elemen hero yang sudah berada dalam layar saat pertama dibuka
+            setTimeout(() => {
+                scrollElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight) {
+                        el.classList.add('is-revealed');
+                    }
+                });
+            }, 50);
+        });
+
+        // -----------------------------------------------------------
+        // 2. HERO FEATURED IMAGE ANGLE SWITCHER (TRANSISI FLUID)
+        // -----------------------------------------------------------
+        const heroImg = document.getElementById('hero-feature-img');
+        const heroAngleLabel = document.getElementById('hero-feature-angle-label');
+        const heroAngleBtns = document.querySelectorAll('.hero-angle-btn');
+
+        function switchHeroAngle(index) {
+            heroAngleBtns.forEach((btn, i) => {
+                if (i === index) {
+                    btn.classList.add('border-brand-text', 'bg-brand-text', 'text-white');
+                    btn.classList.remove('border-brand-border', 'bg-white', 'text-brand-text');
+                    const imgUrl = btn.getAttribute('data-img');
+                    const label = btn.getAttribute('data-label');
+                    
+                    // Fluid close-up transition
+                    heroImg.style.opacity = '0';
+                    heroImg.style.transform = 'scale(1.12)';
+                    setTimeout(() => {
+                        heroImg.src = imgUrl;
+                        heroAngleLabel.innerText = label;
+                        heroImg.style.opacity = '1';
+                        heroImg.style.transform = 'scale(1)';
+                    }, 220);
+                } else {
+                    btn.classList.remove('border-brand-text', 'bg-brand-text', 'text-white');
+                    btn.classList.add('border-brand-border', 'bg-white', 'text-brand-text');
+                }
+            });
+        }
+
+        // -----------------------------------------------------------
+        // 3. CATALOG CATEGORY FILTER
+        // -----------------------------------------------------------
+        function filterCatalog(category) {
+            const items = document.querySelectorAll('.catalog-item');
+            const buttons = document.querySelectorAll('.filter-pill-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-text', 'text-white', 'border-brand-text');
+                btn.classList.add('bg-white', 'text-brand-text', 'border-brand-border');
+            });
+            event.target.classList.remove('bg-white', 'text-brand-text', 'border-brand-border');
+            event.target.classList.add('bg-brand-text', 'text-white', 'border-brand-text');
+
+            items.forEach(item => {
+                const itemCats = item.getAttribute('data-category');
+                if (category === 'all' || itemCats.includes(category)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // -----------------------------------------------------------
+        // 4. HITUNGAN MUNDUR REALISTIS (JUMAT 20.00 WIB)
+        // -----------------------------------------------------------
+        function updateLiveCountdown() {
+            const countdownEl = document.getElementById('live-countdown');
+            if (!countdownEl) return;
+
+            const now = new Date();
+            const nextFriday = new Date(now);
+            const dayOfWeek = now.getDay();
+            let daysUntilFriday = (5 - dayOfWeek + 7) % 7;
+            if (daysUntilFriday === 0 && now.getHours() >= 20) {
+                daysUntilFriday = 7;
+            }
+            nextFriday.setDate(now.getDate() + daysUntilFriday);
+            nextFriday.setHours(20, 0, 0, 0);
+
+            let diff = Math.max(0, nextFriday - now);
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            diff -= days * (1000 * 60 * 60 * 24);
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            diff -= hours * (1000 * 60 * 60);
+            const minutes = Math.floor(diff / (1000 * 60));
+            diff -= minutes * (1000 * 60);
+            const seconds = Math.floor(diff / 1000);
+
+            const pad = (n) => String(n).padStart(2, '0');
+            countdownEl.innerText = `${pad(days)} Hari : ${pad(hours)} Jam : ${pad(minutes)} Menit : ${pad(seconds)} Detik`;
+        }
+        setInterval(updateLiveCountdown, 1000);
+        updateLiveCountdown();
+
+        // -----------------------------------------------------------
+        // 5. ACCORDION FAQ LOGIC
+        // -----------------------------------------------------------
+        function toggleFaq(id) {
+            const content = document.getElementById(id);
+            const iconId = 'faq-icon-' + id.split('-')[1];
+            const icon = document.getElementById(iconId);
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                icon.classList.remove('ph-plus');
+                icon.classList.add('ph-minus');
+            } else {
+                content.classList.add('hidden');
+                icon.classList.remove('ph-minus');
+                icon.classList.add('ph-plus');
+            }
+        }
+
+        // -----------------------------------------------------------
+        // 6. MENU HP TOGGLE
+        // -----------------------------------------------------------
+        const mobileBtn = document.getElementById('mobile-toggle-btn');
+        const mobileDropdown = document.getElementById('mobile-dropdown');
+
+        if (mobileBtn && mobileDropdown) {
+            mobileBtn.addEventListener('click', () => {
+                mobileDropdown.classList.toggle('hidden');
+            });
+        }
+
+        // -----------------------------------------------------------
+        // 7. MODAL INSPEKSI FOTO MAKRO
+        // -----------------------------------------------------------
+        const macroGarments = {
+            'lot-108': {
+                name: "Jaket Kanvas Carhartt Detroit",
+                lot: "Nomor #108 · Pakaian Kerja Amerika",
+                price: "Rp 1.450.000",
+                desc: "Kain kanvas katun tebal warna hijau lumut asli. Bagian dalam berlapis selimut wol hangat yang nyaman. Ritsleting kuningan asli bekerja dengan sangat lancar.",
+                ptp: "62 cm (Pas untuk L–XL)", length: "66 cm", shoulder: "50 cm", sleeve: "61 cm",
+                images: [
+                    "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80"
+                ]
+            },
+            'lot-109': {
+                name: "Jaket Bomber Issey Miyake",
+                lot: "Nomor #109 · Buatan Jepang",
+                price: "Rp 2.850.000",
+                desc: "Bahan nilon jepang berkualitas tinggi yang adem dan ringan di tubuh. Lapisan sutra sintetis cupro sangat halus dan sejuk di kulit.",
+                ptp: "65 cm (Pas untuk XL)", length: "68 cm", shoulder: "54 cm", sleeve: "63 cm",
+                images: [
+                    "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80"
+                ]
+            },
+            'lot-110': {
+                name: "Jaket Fleece Patagonia Retro-X",
+                lot: "Nomor #110 · Pakaian Outdoor Hangat",
+                price: "Rp 1.850.000",
+                desc: "Bahan fleece tebal dan empuk berwarna krem natural dengan saku dada warna ungu terung. Sangat hangat untuk udara malam atau bepergian ke daerah pegunungan.",
+                ptp: "60 cm (Pas untuk L)", length: "70 cm", shoulder: "Raglan Nyaman", sleeve: "62 cm",
+                images: [
+                    "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80"
+                ]
+            },
+            'lot-111': {
+                name: "Jaket Jeans Levi's 70506 Asli",
+                lot: "Nomor #111 · Jeans Klasik Amerika",
+                price: "Rp 1.650.000",
+                desc: "Denim katun murni 14oz buatan pabrik legendaris Cone Mills. Warna biru jeans klasik dengan pemudaran alami yang rapi dan kancing logam lengkap.",
+                ptp: "56 cm (Pas untuk M–L)", length: "64 cm", shoulder: "48 cm", sleeve: "62 cm",
+                images: [
+                    "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80"
+                ]
+            },
+            'lot-112': {
+                name: "Mantel Panjang Wol Yohji Yamamoto",
+                lot: "Nomor #112 · Bahan Wol Hangat",
+                price: "Rp 3.200.000",
+                desc: "100% kain wol tebal warna abu arang gelap. Potongan panjang yang melindungi tubuh dari hawa dingin. Kancing tanduk asli utuh dan rapi.",
+                ptp: "64 cm (Pas untuk L–XL)", length: "112 cm", shoulder: "Model Bebas Gerak", sleeve: "64 cm",
+                images: [
+                    "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80"
+                ]
+            },
+            'lot-113': {
+                name: "Jaket Kulit Asli Schott NYC",
+                lot: "Nomor #113 · Kulit Sapi Asli",
+                price: "Rp 2.650.000",
+                desc: "Kulit sapi asli tebal yang sudah lemas dan nyaman dipakai, tidak kaku di pundak. Memiliki 4 saku depan fungsional dan ritsleting kuningan antik IDEAL.",
+                ptp: "59 cm (Pas untuk L)", length: "72 cm", shoulder: "51 cm", sleeve: "63 cm",
+                images: [
+                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80",
+                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80"
+                ]
+            }
+        };
+
+        let currentActiveLot = 'lot-108';
+        const macroModal = document.getElementById('macro-modal');
+        const macroImg = document.getElementById('macro-modal-img');
+        const macroLensContainer = document.getElementById('macro-lens-container');
+
+        function openInspectModal(lotId) {
+            const data = macroGarments[lotId] || macroGarments['lot-108'];
+            currentActiveLot = lotId;
+
+            document.getElementById('macro-modal-name').innerText = data.name;
+            document.getElementById('macro-modal-lot').innerText = data.lot;
+            document.getElementById('macro-modal-price').innerText = data.price;
+            document.getElementById('macro-modal-desc').innerText = data.desc;
+            document.getElementById('macro-spec-ptp').innerText = data.ptp;
+            document.getElementById('macro-spec-length').innerText = data.length;
+            document.getElementById('macro-spec-shoulder').innerText = data.shoulder;
+            document.getElementById('macro-spec-sleeve').innerText = data.sleeve;
+
+            changeMacroView(0);
+            macroModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeInspectModal() {
+            macroModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function handleMacroBackdropClick(e) {
+            closeInspectModal();
+        }
+
+        function changeMacroView(viewIndex) {
+            const data = macroGarments[currentActiveLot] || macroGarments['lot-108'];
+            const buttons = document.querySelectorAll('.macro-tab-btn');
+
+            buttons.forEach((btn, idx) => {
+                if (idx === viewIndex) {
+                    btn.classList.add('border-brand-text', 'bg-brand-text', 'text-white');
+                    btn.classList.remove('border-brand-border', 'bg-brand-surface', 'text-brand-text');
+                } else {
+                    btn.classList.remove('border-brand-text', 'bg-brand-text', 'text-white');
+                    btn.classList.add('border-brand-border', 'bg-brand-surface', 'text-brand-text');
+                }
+            });
+
+            // Smooth cross-fade and zoom
+            macroImg.style.opacity = '0';
+            macroImg.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                macroImg.src = data.images[viewIndex];
+                macroImg.style.opacity = '1';
+                macroImg.style.transform = 'scale(1)';
+            }, 180);
+        }
+
+        // Lensa zoom interaktif halus
+        if (macroLensContainer) {
+            macroLensContainer.addEventListener('mousemove', (e) => {
+                const rect = macroLensContainer.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                macroImg.style.transformOrigin = `${x}% ${y}%`;
+                macroImg.style.transform = 'scale(1.7)';
+            });
+
+            macroLensContainer.addEventListener('mouseleave', () => {
+                macroImg.style.transformOrigin = 'center center';
+                macroImg.style.transform = 'scale(1)';
+            });
+        }
+
+        function orderFromMacro() {
+            const data = macroGarments[currentActiveLot];
+            closeInspectModal();
+            openOrderModal(`${data.name} (${data.price})`);
+        }
+
+        // -----------------------------------------------------------
+        // 8. FORMULIR PEMESANAN & WA INTEGRASI
+        // -----------------------------------------------------------
+        const orderModal = document.getElementById('order-modal');
+        const orderFormContainer = document.getElementById('order-form-container');
+        const orderSuccessContainer = document.getElementById('order-success-container');
+        const itemSelect = document.getElementById('checkout-item-select');
+        const bagCount = document.getElementById('bag-count');
+
+        function openOrderModal(presetItem) {
+            if (presetItem && itemSelect) {
+                for (let i = 0; i < itemSelect.options.length; i++) {
+                    const optVal = itemSelect.options[i].value.toLowerCase();
+                    const preVal = presetItem.toLowerCase();
+                    if (optVal.includes(preVal.split(' ')[0])) {
+                        itemSelect.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            orderModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeOrderModal() {
+            orderModal.classList.add('hidden');
+            document.body.style.overflow = '';
+            setTimeout(() => {
+                orderFormContainer.classList.remove('hidden');
+                orderSuccessContainer.classList.add('hidden');
+            }, 300);
+        }
+
+        function handleOrderBackdropClick(e) {
+            closeOrderModal();
+        }
+
+        function handleFormSubmission(event) {
+            event.preventDefault();
+
+            const item = document.getElementById('checkout-item-select').value;
+            const name = document.getElementById('cust-name').value;
+            const wa = document.getElementById('cust-wa').value;
+            const city = document.getElementById('cust-city').value;
+
+            // Generate Order Reference
+            const orderCode = '#REW-' + Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('confirmed-order-code').innerText = orderCode;
+
+            // Increment Bag Badge
+            let currentCount = parseInt(bagCount.innerText) || 0;
+            bagCount.innerText = currentCount + 1;
+
+            // Format Pesan WhatsApp yang Santun & Jelas
+            const textMsg = encodeURIComponent(
+                `Halo Admin RE—WEAR,\n\nSaya ingin memesan pakaian pilihan berikut:\n` +
+                `• Pakaian: ${item}\n` +
+                `• Kode Pesanan: ${orderCode}\n` +
+                `• Nama Lengkap: ${name}\n` +
+                `• No. WhatsApp: ${wa}\n` +
+                `• Kota/Kecamatan Pengiriman: ${city}\n\n` +
+                `Mohon rincian ongkir dan nomor rekening transfernya. Terima kasih!`
+            );
+            document.getElementById('wa-direct-link').href = `https://wa.me/6281234567890?text=${textMsg}`;
+
+            // Pindah ke layar sukses
+            orderFormContainer.classList.add('hidden');
+            orderSuccessContainer.classList.remove('hidden');
+        }
+    </script>
+
+</body>
+</html>
