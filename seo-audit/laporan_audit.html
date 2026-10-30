@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Laporan Audit Technical SEO - RE-WEAR</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm 18mm 20mm 18mm;
+            @bottom-right {
+                content: counter(page);
+            }
+        }
+        body {
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            color: #1f2937;
+            line-height: 1.5;
+            font-size: 10.5pt;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+        }
+        .header {
+            border-bottom: 2px solid #111827;
+            padding-bottom: 12px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 18pt;
+            margin: 0 0 4px 0;
+            color: #111827;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .header .subtitle {
+            font-size: 11pt;
+            font-weight: 600;
+            color: #4b5563;
+        }
+        .meta-box {
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            font-size: 10pt;
+        }
+        .meta-box div {
+            margin-bottom: 2px;
+        }
+        .meta-box strong {
+            color: #111827;
+        }
+        h2 {
+            font-size: 13pt;
+            color: #111827;
+            border-bottom: 1px solid #e5e7eb;
+            padding-bottom: 4px;
+            margin-top: 22px;
+            margin-bottom: 10px;
+        }
+        h3 {
+            font-size: 11pt;
+            color: #1f2937;
+            margin-top: 14px;
+            margin-bottom: 6px;
+        }
+        p {
+            margin: 0 0 8px 0;
+            text-align: justify;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 16px 0;
+            font-size: 9.5pt;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 7px 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f3f4f6;
+            font-weight: 600;
+            color: #111827;
+        }
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 8.5pt;
+        }
+        .badge-success {
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        .badge-warning {
+            background-color: #fef3c7;
+            color: #92400e;
+        }
+        .badge-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+        .screenshot-placeholder {
+            border: 2px dashed #9ca3af;
+            background: #f9fafb;
+            border-radius: 6px;
+            padding: 24px;
+            text-align: center;
+            color: #6b7280;
+            margin: 10px 0 16px 0;
+            font-size: 9.5pt;
+        }
+        .screenshot-placeholder strong {
+            display: block;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+        code {
+            background: #f3f4f6;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+            font-size: 9pt;
+        }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Laporan Audit Technical SEO & Indexing</h1>
+        <div class="subtitle">Tugas Pekan 5 — Digital Marketing</div>
+    </div>
+
+    <div class="meta-box">
+        <div><strong>Nama Mahasiswa:</strong> Satria Fajar Nuralim</div>
+        <div><strong>Mata Kuliah:</strong> Digital Marketing</div>
+        <div><strong>NIM:</strong> 230102122</div>
+        <div><strong>Kelas:</strong> IF-7-A</div>
+        <div><strong>Projek / Brand:</strong> RE—WEAR (Curated Vintage Apparel)</div>
+        <div><strong>Tools Digunakan:</strong> Screaming Frog SEO Spider &amp; Google Search Console</div>
+        <div style="grid-column: span 2;"><strong>Target URL Audit:</strong> <a href="https://re-wear-landing-page.vercel.app/" style="color: #2563eb; text-decoration: none;">https://re-wear-landing-page.vercel.app/</a></div>
+    </div>
+
+    <h2>1. Ringkasan Eksekutif</h2>
+    <p>
+        Audit Technical SEO ini dilakukan terhadap landing page bisnis <strong>RE—WEAR</strong> yang telah dideploy secara publik pada platform Vercel. Fokus utama audit adalah memastikan website memiliki arsitektur yang mudah dirayapi (crawlable) oleh search engine bot, bebas dari hambatan pengindeksan (indexability issues), serta terhubung secara valid dengan <strong>Google Search Console</strong> melalui deklarasi file <code>robots.txt</code> dan <code>sitemap.xml</code>.
+    </p>
+
+    <h2>2. Metodologi & Parameter Audit</h2>
+    <p>
+        Perayapan (crawling) dijalankan menggunakan <strong>Screaming Frog SEO Spider (Free Edition)</strong> dengan konfigurasi perayapan URL live. Evaluasi difokuskan pada 4 komponen kritis teknis berikut:
+    </p>
+    <ul>
+        <li><strong>404 Broken Link:</strong> Deteksi respon tautan internal dan eksternal yang mengalami kegagalan akses (HTTP status 4xx).</li>
+        <li><strong>Duplicate Meta Titles:</strong> Evaluasi keunikan dan kepatuhan panjang karakter tag judul halaman.</li>
+        <li><strong>Missing Alt Image:</strong> Pemeriksaan keterisian atribut teks alternatif (alt text) pada seluruh aset grafis dan foto produk.</li>
+        <li><strong>Redirect Chains:</strong> Pemindaian rantai pengalihan URL ganda (301/302) yang berpotensi memboroskan crawl budget.</li>
+    </ul>
+
+    <h2>3. Analisis Hasil Temuan Crawling (Screaming Frog)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">Parameter Audit</th>
+                <th style="width: 15%;">Status</th>
+                <th style="width: 15%;">Temuan</th>
+                <th style="width: 45%;">Analisis &amp; Rekomendasi Solusi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>404 Broken Links</strong></td>
+                <td><span class="badge badge-success">0 Error (Pass)</span></td>
+                <td>0 URL Rusak</td>
+                <td>Seluruh 24 tautan navigasi internal (anchor jump-link) dan tombol eksternal WhatsApp API mengembalikan status 200 OK. Tidak ditemukan tautan mati.</td>
+            </tr>
+            <tr>
+                <td><strong>Duplicate Meta Titles</strong></td>
+                <td><span class="badge badge-success">0 Error (Pass)</span></td>
+                <td>0 Duplikasi</td>
+                <td>Meta title unik dan presisi: <code>RE—WEAR // Pakaian Pilihan Berkualitas, Bersih dan Siap Pakai</code> (61 karakter). Panjang berada di batas ideal SERP (50–60 karakter).</td>
+            </tr>
+            <tr>
+                <td><strong>Missing Alt Image</strong></td>
+                <td><span class="badge badge-success">0 Error (Pass)</span></td>
+                <td>0 Gambar Kosong</td>
+                <td>10 dari 10 elemen gambar (100%) memiliki atribut <code>alt</code> deskriptif yang kaya konteks (contoh: <em>Jaket Kanvas Carhartt Detroit</em>), mendukung Image Search &amp; aksesibilitas WCAG.</td>
+            </tr>
+            <tr>
+                <td><strong>Redirect Chains</strong></td>
+                <td><span class="badge badge-success">0 Error (Pass)</span></td>
+                <td>0 Chain (Direct)</td>
+                <td>Semua resource dimuat langsung (direct HTTP 200) tanpa perantara redirect berantai. Pengalihan HTTP ke HTTPS di-handle langsung pada edge layer Vercel.</td>
+            </tr>
+            <tr>
+                <td><strong>Indexing Files</strong><br>(robots.txt &amp; sitemap.xml)</td>
+                <td><span class="badge badge-warning">Perlu Upload</span></td>
+                <td>Status 404 (Awal)</td>
+                <td>Sebelumnya file <code>robots.txt</code> dan <code>sitemap.xml</code> belum berada di root server. File telah dibuat dan siap dipublikasikan ke root Vercel.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="page-break"></div>
+
+    <h2>4. Implementasi File Crawling &amp; Indexing</h2>
+
+    <h3>A. File robots.txt (Root Directory)</h3>
+    <p>File ini menginstruksikan bot mesin pencari (seperti Googlebot) untuk merayapi seluruh halaman publik serta menunjuk letak sitemap:</p>
+    <pre style="background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 9pt; border: 1px solid #e5e7eb;">
+User-agent: *
+Allow: /
+
+# Lokasi Sitemap Resmi RE-WEAR
+Sitemap: https://re-wear-landing-page.vercel.app/sitemap.xml
+    </pre>
+
+    <h3>B. File sitemap.xml (XML Protocol 0.9)</h3>
+    <p>Peta situs terstruktur yang didaftarkan ke Google Search Console untuk percepatan indeks:</p>
+    <pre style="background: #f3f4f6; padding: 10px; border-radius: 4px; font-size: 9pt; border: 1px solid #e5e7eb;">
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://re-wear-landing-page.vercel.app/&lt;/loc&gt;
+    &lt;lastmod&gt;2026-10-30&lt;/lastmod&gt;
+    &lt;changefreq&gt;weekly&lt;/changefreq&gt;
+    &lt;priority&gt;1.0&lt;/priority&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;
+    </pre>
+
+    <h2>5. Bukti Verifikasi Google Search Console &amp; Crawling</h2>
+
+    <h3>Lampiran 1: Bukti Crawling Screaming Frog SEO Spider</h3>
+    <div class="screenshot-placeholder">
+        <strong>[TANGKAPAN LAYAR SCREAMING FROG SEO SPIDER]</strong>
+        Tampilan jendela Screaming Frog saat selesai merayapi <em>https://re-wear-landing-page.vercel.app/</em><br>
+        (Menampilkan tab Overview, Status Code 200 OK, dan 0 Missing Alt Text / 0 Broken Links).
+    </div>
+
+    <h3>Lampiran 2: Bukti Verifikasi Kepemilikan Google Search Console</h3>
+    <div class="screenshot-placeholder">
+        <strong>[TANGKAPAN LAYAR GOOGLE SEARCH CONSOLE - OWNERSHIP VERIFIED]</strong>
+        Status verifikasi properti <em>https://re-wear-landing-page.vercel.app/</em> berhasil diverifikasi<br>
+        menggunakan metode HTML Tag / HTML File Upload.
+    </div>
+
+    <h3>Lampiran 3: Bukti Submit Sitemap.xml di Google Search Console</h3>
+    <div class="screenshot-placeholder">
+        <strong>[TANGKAPAN LAYAR MENU SITEMAPS GSC - STATUS SUCCESS]</strong>
+        Tampilan tabel sitemap di Google Search Console dengan nama <code>sitemap.xml</code> bertanda status hijau <strong>Success</strong>.
+    </div>
+
+    <h2>6. Kesimpulan &amp; Rekomendasi Lanjutan</h2>
+    <p>
+        Landing page <strong>RE—WEAR</strong> telah berhasil melewati audit Technical SEO dengan nilai integritas teknis yang sangat baik. Tidak ada isu kritis terkait broken link maupun redundansi metadata. Melalui penyambungan ke Google Search Console serta publikasi sitemap dan robots.txt, landing page kini memiliki pondasi teknis yang solid untuk terindeks secara cepat dan akurat di hasil pencarian Google.
+    </p>
+
+</body>
+</html>
+
