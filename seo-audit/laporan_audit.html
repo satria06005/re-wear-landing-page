@@ -2,169 +2,125 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Audit Technical SEO & Indexing - RE-WEAR</title>
+    <title>Laporan Audit Technical SEO - RE-WEAR</title>
     <style>
         @page {
             size: A4;
-            margin: 16mm 18mm 16mm 18mm;
+            margin: 18mm 18mm 18mm 18mm;
         }
         body {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            color: #1f2937;
-            line-height: 1.5;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #222222;
+            line-height: 1.55;
             font-size: 10pt;
             margin: 0;
             padding: 0;
             background: #ffffff;
         }
         .header {
-            border-bottom: 2.5px solid #111827;
-            padding-bottom: 10px;
+            border-bottom: 2px solid #222222;
+            padding-bottom: 8px;
             margin-bottom: 16px;
         }
         .header h1 {
             font-size: 16pt;
-            margin: 0 0 3px 0;
-            color: #111827;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            margin: 0 0 4px 0;
+            color: #111111;
         }
         .header .subtitle {
             font-size: 10.5pt;
+            color: #555555;
             font-weight: 600;
-            color: #4b5563;
         }
-        .meta-box {
-            background-color: #f9fafb;
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-            padding: 10px 14px;
-            margin-bottom: 16px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px;
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 18px;
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+        }
+        .meta-table td {
+            padding: 6px 12px;
+            border: 1px solid #e5e5e5;
             font-size: 9.5pt;
         }
-        .meta-box strong {
-            color: #111827;
+        .meta-table td.label {
+            width: 20%;
+            font-weight: 600;
+            color: #333333;
+            background: #f5f5f5;
         }
         h2 {
-            font-size: 12pt;
-            color: #111827;
-            border-bottom: 1px solid #e5e7eb;
+            font-size: 11.5pt;
+            color: #111111;
+            border-bottom: 1px solid #e0e0e0;
             padding-bottom: 3px;
             margin-top: 18px;
             margin-bottom: 8px;
-        }
-        h3 {
-            font-size: 10.5pt;
-            color: #1f2937;
-            margin-top: 12px;
-            margin-bottom: 5px;
         }
         p {
             margin: 0 0 8px 0;
             text-align: justify;
         }
-        table {
+        table.data-table {
             width: 100%;
             border-collapse: collapse;
             margin: 10px 0 14px 0;
             font-size: 9pt;
         }
-        th, td {
-            border: 1px solid #d1d5db;
-            padding: 6px 9px;
+        table.data-table th, table.data-table td {
+            border: 1px solid #d5d5d5;
+            padding: 7px 10px;
             text-align: left;
         }
-        th {
-            background-color: #f3f4f6;
+        table.data-table th {
+            background-color: #f2f2f2;
             font-weight: 600;
-            color: #111827;
+            color: #222222;
         }
-        .badge {
-            display: inline-block;
-            padding: 2px 7px;
-            border-radius: 4px;
+        .status-ok {
+            color: #15803d;
             font-weight: 600;
-            font-size: 8pt;
-        }
-        .badge-success {
-            background-color: #d1fae5;
-            color: #065f46;
-        }
-        .badge-info {
-            background-color: #dbeafe;
-            color: #1e40af;
-        }
-        .sf-box {
-            background: #1e293b;
-            color: #f8fafc;
-            border-radius: 6px;
-            padding: 12px 16px;
-            margin: 10px 0 14px 0;
-            font-family: Consolas, monospace;
-            font-size: 8.5pt;
-        }
-        .sf-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            margin-top: 8px;
-        }
-        .sf-item {
-            background: #334155;
-            padding: 6px 10px;
-            border-radius: 4px;
-        }
-        .sf-item-val {
-            font-size: 12pt;
-            font-weight: 700;
-            color: #38bdf8;
-        }
-        .sf-item-lbl {
-            font-size: 7.5pt;
-            color: #cbd5e1;
-            text-transform: uppercase;
-        }
-        .screenshot-card {
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            overflow: hidden;
-            background: #f9fafb;
-            margin: 10px 0 14px 0;
-            text-align: center;
-        }
-        .screenshot-card img {
-            width: 100%;
-            max-height: 250px;
-            object-fit: contain;
-            display: block;
-            background: #ffffff;
-        }
-        .screenshot-caption {
-            padding: 6px 10px;
-            font-size: 8.5pt;
-            font-weight: 600;
-            color: #374151;
-            background: #f3f4f6;
-            border-top: 1px solid #e5e7eb;
         }
         pre {
-            background: #f8fafc;
+            background: #f8f9fa;
             padding: 8px 12px;
             border-radius: 4px;
             font-size: 8.5pt;
             border: 1px solid #e2e8f0;
             margin: 6px 0 10px 0;
             line-height: 1.4;
+            font-family: Consolas, monospace;
         }
         code {
-            background: #f3f4f6;
+            background: #f1f3f5;
             padding: 1px 4px;
             border-radius: 3px;
             font-family: Consolas, monospace;
             font-size: 8.5pt;
+        }
+        .screenshot-container {
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            padding: 8px;
+            background: #fafafa;
+            margin: 10px 0 14px 0;
+            text-align: center;
+        }
+        .screenshot-container img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #e0e0e0;
+        }
+        .caption {
+            font-size: 8.5pt;
+            color: #555555;
+            margin-top: 6px;
+            font-style: italic;
         }
         .page-break {
             page-break-after: always;
@@ -174,126 +130,98 @@
 <body>
 
     <div class="header">
-        <h1>Laporan Audit Technical SEO Crawling &amp; Indexing</h1>
-        <div class="subtitle">Tugas Pekan 5 — Digital Marketing</div>
+        <h1>Laporan Audit Technical SEO &amp; Indexing</h1>
+        <div class="subtitle">Tugas Praktik Pekan 5 — Digital Marketing</div>
     </div>
 
-    <div class="meta-box">
-        <div><strong>Nama Mahasiswa:</strong> Satria Fajar Nuralim</div>
-        <div><strong>Mata Kuliah:</strong> Digital Marketing</div>
-        <div><strong>NIM:</strong> 230102122</div>
-        <div><strong>Kelas:</strong> IF-7-A</div>
-        <div><strong>Projek / Brand:</strong> RE—WEAR (Curated Vintage Apparel)</div>
-        <div><strong>Tools Digunakan:</strong> Screaming Frog SEO Spider &amp; Google Search Console</div>
-        <div style="grid-column: span 2;"><strong>Target URL Audit:</strong> <a href="https://re-wear-landing-page.vercel.app/" style="color: #2563eb; text-decoration: none;">https://re-wear-landing-page.vercel.app/</a></div>
-    </div>
+    <table class="meta-table">
+        <tr>
+            <td class="label">Nama</td>
+            <td>Satria Fajar Nuralim</td>
+            <td class="label">Mata Kuliah</td>
+            <td>Digital Marketing</td>
+        </tr>
+        <tr>
+            <td class="label">NIM</td>
+            <td>230102122</td>
+            <td class="label">Kelas</td>
+            <td>IF-7-A</td>
+        </tr>
+        <tr>
+            <td class="label">Website</td>
+            <td colspan="3"><a href="https://re-wear-landing-page.vercel.app/" style="color: #1a56db; text-decoration: none;">https://re-wear-landing-page.vercel.app/</a></td>
+        </tr>
+        <tr>
+            <td class="label">Alat Audit</td>
+            <td colspan="3">Screaming Frog SEO Spider &amp; Google Search Console</td>
+        </tr>
+    </table>
 
-    <h2>1. Ringkasan Eksekutif</h2>
+    <h2>1. Tujuan Audit</h2>
     <p>
-        Audit Technical SEO ini dilakukan terhadap landing page bisnis <strong>RE—WEAR</strong> yang telah dideploy secara publik di platform Vercel pada URL <code>https://re-wear-landing-page.vercel.app/</code>. Tujuan audit adalah mengevaluasi kesehatan teknis perayapan (crawlability), memastikan kesiapan pengindeksan (indexability), mengeliminasi hambatan SEO seperti broken link dan duplikasi metadata, serta memverifikasi kepemilikan dan menyetorkan sitemap pada <strong>Google Search Console</strong>.
+        Audit Technical SEO ini dilakukan pada landing page toko online RE—WEAR yang sudah aktif di platform Vercel. Tujuannya adalah untuk memeriksa apakah website memiliki kendala teknis yang bisa membuat mesin pencari sulit membaca halaman, seperti tautan rusak, judul halaman yang terduplikasi, gambar tanpa teks alternatif, atau redirect yang bermasalah. Selain itu, audit ini juga mencakup verifikasi kepemilikan website di Google Search Console serta pengiriman file sitemap.
     </p>
 
-    <h2>2. Metodologi &amp; Parameter Perayapan (Screaming Frog SEO Spider)</h2>
+    <h2>2. Metode Pengecekan</h2>
     <p>
-        Perayapan dilakukan menggunakan <strong>Screaming Frog SEO Spider</strong> dengan konfigurasi audit Googlebot. Ringkasan metrik perayapan live ditampilkan pada panel metrik teknis di bawah ini:
+        Pengecekan teknis dilakukan dengan merayapi (crawling) alamat website langsung menggunakan Screaming Frog SEO Spider. Parameter yang diperiksa mencakup respon HTTP server, struktur judul halaman (title tag), atribut alt pada setiap gambar, serta susunan link internal dan eksternal.
     </p>
 
-    <div class="sf-box">
-        <div style="font-weight: 600; color: #93c5fd; margin-bottom: 4px;">SCREAMING FROG SEO SPIDER — CRAWL OVERVIEW SUMMARY</div>
-        <div>Target URL: https://re-wear-landing-page.vercel.app/ | Protocol: HTTPS/2 | Server: Vercel CDN</div>
-        <div class="sf-grid">
-            <div class="sf-item">
-                <div class="sf-item-val" style="color: #4ade80;">100%</div>
-                <div class="sf-item-lbl">Crawl Progress</div>
-            </div>
-            <div class="sf-item">
-                <div class="sf-item-val" style="color: #4ade80;">0</div>
-                <div class="sf-item-lbl">404 Broken Links</div>
-            </div>
-            <div class="sf-item">
-                <div class="sf-item-val" style="color: #4ade80;">0</div>
-                <div class="sf-item-lbl">Duplicate Titles</div>
-            </div>
-            <div class="sf-item">
-                <div class="sf-item-val" style="color: #4ade80;">0</div>
-                <div class="sf-item-lbl">Missing Alt Text</div>
-            </div>
-            <div class="sf-item">
-                <div class="sf-item-val" style="color: #4ade80;">0</div>
-                <div class="sf-item-lbl">Redirect Chains</div>
-            </div>
-            <div class="sf-item">
-                <div class="sf-item-val">200 OK</div>
-                <div class="sf-item-lbl">Status Code</div>
-            </div>
-            <div class="sf-item">
-                <div class="sf-item-val">61 Chars</div>
-                <div class="sf-item-lbl">Title Length</div>
-            </div>
-            <div class="sf-item">
-                <div class="sf-item-val">1 Page</div>
-                <div class="sf-item-lbl">Discovered URLs</div>
-            </div>
-        </div>
-    </div>
+    <h2>3. Hasil Pengecekan 4 Masalah Utama</h2>
+    <p>
+        Berikut adalah ringkasan hasil audit untuk empat parameter utama yang diperiksa:
+    </p>
 
-    <h2>3. Analisis Hasil Temuan Audit (4 Parameter Utama)</h2>
-
-    <table>
+    <table class="data-table">
         <thead>
             <tr>
-                <th style="width: 25%;">Parameter Audit</th>
-                <th style="width: 16%;">Status Audit</th>
-                <th style="width: 15%;">Temuan Nilai</th>
-                <th style="width: 44%;">Analisis Mendalam &amp; Tindak Lanjut</th>
+                <th style="width: 28%;">Komponen yang Diperiksa</th>
+                <th style="width: 18%;">Status</th>
+                <th style="width: 54%;">Keterangan Hasil</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td><strong>1. 404 Broken Link</strong><br>(Client Error 4xx)</td>
-                <td><span class="badge badge-success">Pass (0 Error)</span></td>
-                <td>0 Link Rusak</td>
-                <td>Semua 24 tautan navigasi internal anchor jump-link (<code>#koleksi-drop</code>, <code>#cara-pembersihan</code>, <code>#panduan-kondisi</code>, <code>#tanya-jawab</code>) dan tombol WhatsApp CTA mengembalikan status valid 200 OK.</td>
+                <td><strong>1. 404 Broken Link</strong></td>
+                <td><span class="status-ok">Aman (0 Link Rusak)</span></td>
+                <td>Semua 24 tautan di halaman (baik menu navigasi seperti <code>#koleksi-drop</code> dan <code>#cara-pembersihan</code> maupun tombol WhatsApp) berhasil diakses normal dengan kode respon 200 OK. Tidak ditemukan tautan yang mengarah ke halaman kosong atau error 404.</td>
             </tr>
             <tr>
                 <td><strong>2. Duplicate Meta Titles</strong></td>
-                <td><span class="badge badge-success">Pass (0 Error)</span></td>
-                <td>0 Duplikasi</td>
-                <td>Meta title unik: <code>RE—WEAR // Pakaian Pilihan Berkualitas, Bersih dan Siap Pakai</code>. Panjang 61 karakter, presisi dan memenuhi standar batas tampilan snippet Google (50–60 karakter) tanpa terpotong (truncation).</td>
+                <td><span class="status-ok">Aman (0 Duplikasi)</span></td>
+                <td>Judul halaman dibuat tunggal dan jelas: <code>RE—WEAR // Pakaian Pilihan Berkualitas, Bersih dan Siap Pakai</code>. Panjang judul adalah 61 karakter, pas dengan batas tampilan hasil pencarian Google sehingga tidak terpotong.</td>
             </tr>
             <tr>
                 <td><strong>3. Missing Alt Image</strong></td>
-                <td><span class="badge badge-success">Pass (0 Error)</span></td>
-                <td>0 Missing Alt</td>
-                <td>10 dari 10 elemen gambar (100%) memiliki atribut <code>alt</code> deskriptif spesifik (contoh: <em>Jaket Kanvas Carhartt Detroit</em>, <em>Farhan - Kurator Pakaian</em>). Mengoptimalkan Google Image Search dan aksesibilitas WCAG.</td>
+                <td><span class="status-ok">Aman (0 Gambar Kosong)</span></td>
+                <td>Semua 10 gambar di website (foto produk jaket dan foto kurator) sudah memiliki teks alternatif (alt tag) yang mendeskripsikan isi gambar dengan jelas, contohnya <em>Jaket Kanvas Carhartt Detroit</em>.</td>
             </tr>
             <tr>
                 <td><strong>4. Redirect Chains</strong></td>
-                <td><span class="badge badge-success">Pass (0 Error)</span></td>
-                <td>0 Chain (Direct)</td>
-                <td>Tidak ada pengalihan berantai (301/302 chains). Semua file dan aset disajikan langsung (Direct 200 OK) melalui edge network Vercel sehingga tidak membuang crawl budget Googlebot.</td>
+                <td><span class="status-ok">Aman (0 Rantai Redirect)</span></td>
+                <td>Tidak ada pengalihan halaman berulang (redirect chains). Halaman dan seluruh aset gambar serta script langsung dimuat dari server tanpa melalui proses redirect bertingkat.</td>
             </tr>
         </tbody>
     </table>
 
     <div class="page-break"></div>
 
-    <h2>4. Implementasi File Crawling &amp; Indexing</h2>
+    <h2>4. Pengaturan File robots.txt dan sitemap.xml</h2>
 
-    <h3>A. File robots.txt (Root Server Vercel)</h3>
-    <p>File ini berhasil dibuat dan ditempatkan di root direktori untuk mengarahkan Googlebot serta menunjuk lokasi peta situs resmi:</p>
-    <pre>
-User-agent: *
+    <p>
+        Agar mesin pencari dapat mengetahui halaman mana saja yang boleh dirayapi dan di mana letak daftar halamannya, dibuat dua file konfigurasi pada folder utama (root) website:
+    </p>
+
+    <p><strong>A. File robots.txt</strong><br>
+    File ini mengizinkan bot mesin pencari untuk membuka website dan mencantumkan alamat sitemap resminya:</p>
+    <pre>User-agent: *
 Allow: /
 
-# Sitemap Resmi RE-WEAR
-Sitemap: https://re-wear-landing-page.vercel.app/sitemap.xml
-    </pre>
+Sitemap: https://re-wear-landing-page.vercel.app/sitemap.xml</pre>
 
-    <h3>B. File sitemap.xml (XML Sitemap Protocol 0.9)</h3>
-    <p>Peta situs XML terstruktur dengan deklarasi canonical URL, tanggal modifikasi berkala, dan prioritas perayapan tertinggi:</p>
-    <pre>
-&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+    <p><strong>B. File sitemap.xml</strong><br>
+    File peta situs berformat XML yang berisi alamat halaman website, tanggal pembaruan terakhir, dan prioritas indeks:</p>
+    <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
   &lt;url&gt;
     &lt;loc&gt;https://re-wear-landing-page.vercel.app/&lt;/loc&gt;
@@ -301,31 +229,22 @@ Sitemap: https://re-wear-landing-page.vercel.app/sitemap.xml
     &lt;changefreq&gt;weekly&lt;/changefreq&gt;
     &lt;priority&gt;1.0&lt;/priority&gt;
   &lt;/url&gt;
-&lt;/urlset&gt;
-    </pre>
+&lt;/urlset&gt;</pre>
 
-    <h2>5. Bukti Verifikasi Google Search Console &amp; Penyerahan Sitemap</h2>
+    <h2>5. Bukti Verifikasi Google Search Console</h2>
     <p>
-        Website telah berhasil dihubungkan ke <strong>Google Search Console</strong> menggunakan metode verifikasi <code>Tag HTML</code> dengan token <code>862ANDzzcihkiuV8ymGs1HhEDfD5hw-MHpQXR70cZU0</code>. File <code>sitemap.xml</code> telah diserahkan dan berhasil diproses dengan status <strong>Sukses</strong>.
+        Website telah didaftarkan ke Google Search Console menggunakan metode Tag HTML. File <code>sitemap.xml</code> juga sudah dikirimkan melalui menu Peta Situs dan berhasil terbaca oleh sistem Google dengan status <strong>Sukses</strong>.
     </p>
 
-    <div class="screenshot-card">
-        <img src="gsc_sitemap_success.png" alt="Bukti Google Search Console - Peta Situs Berhasil Dikirimkan">
-        <div class="screenshot-caption">
-            Gambar 1: Bukti Otentik Google Search Console — Peta Situs (sitemap.xml) Berhasil Terkirim dan Berstatus "Sukses" (1 Halaman Ditemukan).
-        </div>
+    <div class="screenshot-container">
+        <img src="gsc_sitemap_success.png" alt="Bukti Peta Situs Berhasil di Google Search Console">
+        <div class="caption">Bukti Google Search Console: Peta situs (sitemap.xml) berhasil dikirim dan terbaca dengan status Sukses (1 halaman ditemukan).</div>
     </div>
 
-    <h2>6. Kesimpulan &amp; Rekomendasi</h2>
+    <h2>6. Kesimpulan</h2>
     <p>
-        Berdasarkan hasil audit Technical SEO yang komprehensif, landing page <strong>RE—WEAR</strong> telah 100% memenuhi kriteria kelulusan teknis:
+        Dari hasil audit teknis ini, landing page RE—WEAR tidak memiliki masalah teknis mendasar seperti link rusak, gambar tanpa keterangan alt, atau masalah pengalihan URL. Website juga sudah terhubung secara resmi ke Google Search Console dan memiliki file sitemap yang aktif, sehingga siap dirayapi dan ditampilkan oleh Google pada hasil pencarian.
     </p>
-    <ol>
-        <li>Bebas dari broken links (404), duplikasi tag judul, dan rantai pengalihan (redirect chains).</li>
-        <li>Seluruh visual gambar telah teroptimasi dengan metadata alt text yang deskriptif.</li>
-        <li>Infrastruktur indexing (robots.txt dan sitemap.xml) telah aktif di server CDN Vercel.</li>
-        <li>Telah terverifikasi secara resmi di <strong>Google Search Console</strong> dengan status sitemap aktif dan siap bersaing pada Search Engine Result Pages (SERP) Google.</li>
-    </ol>
 
 </body>
 </html>
