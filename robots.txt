@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Sitemap URL
+Sitemap: https://re-wear-landing-page.vercel.app/sitemap.xml
+
