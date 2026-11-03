@@ -25,32 +25,90 @@
     <meta name="twitter:description" content="Toko kurasi pakaian vintage dan pre-loved pilihan. Dicuci bersih dengan uap panas 120°C.">
     <meta name="twitter:image" content="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&amp;fit=crop&amp;w=1200&amp;q=80">
 
-    <!-- Schema.org JSON-LD Structured Data -->
+    <!-- Preconnect & DNS-Prefetch for Speed Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="dns-prefetch" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- Preload Critical Hero Image (LCP Speed Optimization - WebP) -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&amp;fit=crop&amp;w=800&amp;q=75&amp;fm=webp" fetchpriority="high">
+
+    <!-- Schema.org JSON-LD Structured Data: Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ClothingStore",
+      "@type": "Organization",
+      "@id": "https://re-wear-landing-page.vercel.app/#organization",
       "name": "RE—WEAR",
-      "image": "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&amp;fit=crop&amp;w=1200&amp;q=80",
-      "description": "Toko kurasi pakaian vintage dan pre-loved pilihan. Dicuci bersih dengan uap panas 120°C, diukur manual sentimeter demi sentimeter, dan dijamin 100% original.",
+      "alternateName": "RE-WEAR Vintage & Pre-Loved",
       "url": "https://re-wear-landing-page.vercel.app/",
+      "logo": "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80",
+      "description": "Platform kurasi pakaian vintage dan pre-loved pilihan berkualitas tinggi di Bandung. Dicuci bersih uap panas 120°C dan bergaransi originalitas.",
+      "email": "halo@re-wear.id",
       "telephone": "+6281234567890",
-      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Jl. Riau No. 120",
         "addressLocality": "Bandung",
+        "addressRegion": "Jawa Barat",
+        "postalCode": "40115",
         "addressCountry": "ID"
+      },
+      "sameAs": [
+        "https://www.instagram.com/rewear.catalog",
+        "https://www.tiktok.com/@rewear.id"
+      ]
+    }
+    </script>
+
+    <!-- Schema.org JSON-LD Structured Data: Product -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "@id": "https://re-wear-landing-page.vercel.app/#product-carhartt-detroit",
+      "name": "Jaket Kanvas Tebal Carhartt Detroit Vintage",
+      "image": [
+        "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=75&fm=webp",
+        "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=75&fm=webp",
+        "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=75&fm=webp"
+      ],
+      "description": "Jaket kanvas Carhartt Detroit original kurasi RE—WEAR. Heavyweight cotton duck canvas, zipper YKK original, bersih higienis uap 120°C.",
+      "sku": "RW-CRT-001",
+      "mpn": "CRT-DET-1998",
+      "brand": {
+        "@type": "Brand",
+        "name": "Carhartt"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://re-wear-landing-page.vercel.app/#katalog",
+        "priceCurrency": "IDR",
+        "price": "685000",
+        "priceValidUntil": "2027-12-31",
+        "itemCondition": "https://schema.org/UsedCondition",
+        "availability": "https://schema.org/InStock",
+        "seller": {
+          "@type": "Organization",
+          "name": "RE—WEAR"
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "28"
       }
     }
     </script>
 
-    <!-- Google Fonts: Plus Jakarta Sans (Sangat mudah dibaca oleh semua usia, aperture terbuka, kontras tajam) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts: Plus Jakarta Sans -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Phosphor Icons -->
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Phosphor Icons (Deferred for Speed Optimization) -->
+    <script src="https://unpkg.com/@phosphor-icons/web" defer></script>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -371,8 +429,11 @@
                     <!-- Wadah Gambar dengan Transisi Close-Up yang Halus -->
                     <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
                         <img id="hero-feature-img" 
-                             src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=80" 
+                             src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=75&fm=webp" 
                              alt="Jaket Kanvas Tebal Carhartt Detroit" 
+                             width="800" height="600"
+                             fetchpriority="high"
+                             decoding="async"
                              class="img-reveal-target w-full h-full object-cover">
                         
                         <div class="absolute bottom-3 left-3 bg-brand-text/90 text-white text-xs font-medium px-3 py-1.5 rounded">
@@ -382,13 +443,13 @@
 
                     <!-- Tombol Sudut Foto (Teks Mudah Dipahami) -->
                     <div class="grid grid-cols-3 gap-2 mb-4 text-xs font-semibold">
-                        <button onclick="switchHeroAngle(0)" class="hero-angle-btn border border-brand-text bg-brand-text text-white py-2 px-2 text-center rounded transition-all" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=80" data-label="Foto: Tampak Keseluruhan">
+                        <button onclick="switchHeroAngle(0)" class="hero-angle-btn border border-brand-text bg-brand-text text-white py-2 px-2 text-center rounded transition-all" data-img="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=75&fm=webp" data-label="Foto: Tampak Keseluruhan">
                             1. Keseluruhan
                         </button>
-                        <button onclick="switchHeroAngle(1)" class="hero-angle-btn border border-brand-border bg-white text-brand-text hover:border-brand-text py-2 px-2 text-center rounded transition-all" data-img="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80" data-label="Foto: Serat Bahan Kain Katun">
+                        <button onclick="switchHeroAngle(1)" class="hero-angle-btn border border-brand-border bg-white text-brand-text hover:border-brand-text py-2 px-2 text-center rounded transition-all" data-img="https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=75&fm=webp" data-label="Foto: Serat Bahan Kain Katun">
                             2. Bahan Kain
                         </button>
-                        <button onclick="switchHeroAngle(2)" class="hero-angle-btn border border-brand-border bg-white text-brand-text hover:border-brand-text py-2 px-2 text-center rounded transition-all" data-img="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80" data-label="Foto: Ritsleting & Kancing Asli">
+                        <button onclick="switchHeroAngle(2)" class="hero-angle-btn border border-brand-border bg-white text-brand-text hover:border-brand-text py-2 px-2 text-center rounded transition-all" data-img="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=75&fm=webp" data-label="Foto: Ritsleting & Kancing Asli">
                             3. Kancing & Tag
                         </button>
                     </div>
@@ -474,9 +535,10 @@
                 <div>
                     <!-- Foto dengan Transisi Close-up -->
                     <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
-                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=80" 
+                        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=75&fm=webp" 
                              alt="Jaket Carhartt Detroit Hijau Lumut" 
-                             loading="lazy"
+                             width="600" height="450"
+                             loading="lazy" decoding="async"
                              class="img-reveal-target w-full h-full object-cover">
                         <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
                             Nomor #108
@@ -528,9 +590,10 @@
                 <div>
                     <!-- Foto dengan Transisi Close-up -->
                     <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
-                        <img src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1000&q=80" 
+                        <img src="https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=600&q=75&fm=webp" 
                              alt="Jaket Bomber Issey Miyake Hijau Zaitun" 
-                             loading="lazy"
+                             width="600" height="450"
+                             loading="lazy" decoding="async"
                              class="img-reveal-target w-full h-full object-cover">
                         <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
                             Nomor #109
@@ -636,9 +699,10 @@
                 <div>
                     <!-- Foto dengan Transisi Close-up -->
                     <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
-                        <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1000&q=80" 
+                        <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=600&q=75&fm=webp" 
                              alt="Jaket Jeans Levi's Asli Biru Klasik" 
-                             loading="lazy"
+                             width="600" height="450"
+                             loading="lazy" decoding="async"
                              class="img-reveal-target w-full h-full object-cover">
                         <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
                             Nomor #111
@@ -690,9 +754,10 @@
                 <div>
                     <!-- Foto dengan Transisi Close-up -->
                     <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
-                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=1000&q=80" 
+                        <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=75&fm=webp" 
                              alt="Mantel Panjang Bahan Wol Hangat" 
-                             loading="lazy"
+                             width="600" height="450"
+                             loading="lazy" decoding="async"
                              class="img-reveal-target w-full h-full object-cover">
                         <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
                             Nomor #112
@@ -744,9 +809,10 @@
                 <div>
                     <!-- Foto dengan Transisi Close-up -->
                     <div class="img-reveal-wrapper rounded-md aspect-[4/3] mb-4 border border-brand-border relative">
-                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1000&q=80" 
+                        <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=75&fm=webp" 
                              alt="Jaket Kulit Asli Schott Tebal & Lembut" 
-                             loading="lazy"
+                             width="600" height="450"
+                             loading="lazy" decoding="async"
                              class="img-reveal-target w-full h-full object-cover">
                         <div class="absolute top-3 left-3 bg-brand-text/90 text-white text-xs font-bold px-2.5 py-1 rounded">
                             Nomor #113
@@ -947,9 +1013,10 @@
             <!-- Foto Studio dengan Efek Close-Up -->
             <div class="lg:col-span-5 order-2 lg:order-1 reveal-on-scroll">
                 <div class="img-reveal-wrapper rounded-lg aspect-[4/5] border border-brand-border shadow-card">
-                    <img src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=1000&q=80" 
+                    <img src="https://images.unsplash.com/photo-1544441893-675973e31985?auto=format&fit=crop&w=800&q=75&fm=webp" 
                          alt="Suasana Studio RE-WEAR di Cipete Jakarta Selatan" 
-                         loading="lazy"
+                         width="800" height="1000"
+                         loading="lazy" decoding="async"
                          class="img-reveal-target w-full h-full object-cover">
                 </div>
                 <p class="text-xs font-medium text-brand-text-soft mt-3 text-center">
@@ -981,7 +1048,7 @@
 
                 <div class="pt-4 border-t border-brand-border flex items-center gap-4">
                     <div class="w-12 h-12 rounded-full overflow-hidden border border-brand-border flex-shrink-0">
-                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=200&q=80" alt="Farhan - Kurator Pakaian" class="w-full h-full object-cover">
+                        <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=120&q=75&fm=webp" alt="Farhan - Kurator Pakaian" width="48" height="48" loading="lazy" decoding="async" class="w-full h-full object-cover">
                     </div>
                     <div>
                         <h4 class="font-bold text-brand-text text-base">Farhan & Tim Kurasi</h4>
@@ -1239,8 +1306,10 @@
                 <div class="md:col-span-7">
                     <div id="macro-lens-container" class="img-reveal-wrapper rounded-md aspect-[4/3] border border-brand-border lens-container relative">
                         <img id="macro-modal-img" 
-                             src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=80" 
+                             src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=75&fm=webp" 
                              alt="Detail Bahan Pakaian" 
+                             width="900" height="675"
+                             loading="lazy" decoding="async"
                              class="w-full h-full object-cover">
                     </div>
                     
@@ -1589,9 +1658,9 @@
                 desc: "Kain kanvas katun tebal warna hijau lumut asli. Bagian dalam berlapis selimut wol hangat yang nyaman. Ritsleting kuningan asli bekerja dengan sangat lancar.",
                 ptp: "62 cm (Pas untuk L–XL)", length: "66 cm", shoulder: "50 cm", sleeve: "61 cm",
                 images: [
-                    "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80"
+                    "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=75&fm=webp"
                 ]
             },
             'lot-109': {
@@ -1601,9 +1670,9 @@
                 desc: "Bahan nilon jepang berkualitas tinggi yang adem dan ringan di tubuh. Lapisan sutra sintetis cupro sangat halus dan sejuk di kulit.",
                 ptp: "65 cm (Pas untuk XL)", length: "68 cm", shoulder: "54 cm", sleeve: "63 cm",
                 images: [
-                    "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80"
+                    "https://images.unsplash.com/photo-1548883354-7622d03aca27?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=75&fm=webp"
                 ]
             },
             'lot-110': {
@@ -1613,9 +1682,9 @@
                 desc: "Bahan fleece tebal dan empuk berwarna krem natural dengan saku dada warna ungu terung. Sangat hangat untuk udara malam atau bepergian ke daerah pegunungan.",
                 ptp: "60 cm (Pas untuk L)", length: "70 cm", shoulder: "Raglan Nyaman", sleeve: "62 cm",
                 images: [
-                    "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80"
+                    "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=75&fm=webp"
                 ]
             },
             'lot-111': {
@@ -1625,9 +1694,9 @@
                 desc: "Denim katun murni 14oz buatan pabrik legendaris Cone Mills. Warna biru jeans klasik dengan pemudaran alami yang rapi dan kancing logam lengkap.",
                 ptp: "56 cm (Pas untuk M–L)", length: "64 cm", shoulder: "48 cm", sleeve: "62 cm",
                 images: [
-                    "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80"
+                    "https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=75&fm=webp"
                 ]
             },
             'lot-112': {
@@ -1637,9 +1706,9 @@
                 desc: "100% kain wol tebal warna abu arang gelap. Potongan panjang yang melindungi tubuh dari hawa dingin. Kancing tanduk asli utuh dan rapi.",
                 ptp: "64 cm (Pas untuk L–XL)", length: "112 cm", shoulder: "Model Bebas Gerak", sleeve: "64 cm",
                 images: [
-                    "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80"
+                    "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=75&fm=webp"
                 ]
             },
             'lot-113': {
@@ -1649,9 +1718,9 @@
                 desc: "Kulit sapi asli tebal yang sudah lemas dan nyaman dipakai, tidak kaku di pundak. Memiliki 4 saku depan fungsional dan ritsleting kuningan antik IDEAL.",
                 ptp: "59 cm (Pas untuk L)", length: "72 cm", shoulder: "51 cm", sleeve: "63 cm",
                 images: [
-                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=1200&q=80",
-                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80"
+                    "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=900&q=75&fm=webp",
+                    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=900&q=75&fm=webp"
                 ]
             }
         };
