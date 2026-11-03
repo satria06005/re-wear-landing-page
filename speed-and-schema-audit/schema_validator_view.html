@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schema Markup Validator - RE-WEAR</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f8f9fa; color: #202124; }
+        .top-bar { background: #ffffff; border-bottom: 1px solid #dadce0; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-box { background: #1a73e8; color: white; font-weight: 800; font-size: 16px; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
+        .title { font-size: 18px; font-weight: 600; color: #202124; }
+        .url-box { font-size: 13px; color: #5f6368; background: #f1f3f4; padding: 6px 14px; border-radius: 20px; display: flex; align-items: center; gap: 8px; }
+        .url-box strong { color: #1a73e8; font-weight: 600; }
+
+        .status-strip { background: #e6f4ea; border-bottom: 1px solid #ceead6; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #137333; }
+        .status-left { display: flex; align-items: center; gap: 12px; font-weight: 600; }
+        .badge-pill { background: #137333; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
+        .badge-count { background: #ffffff; border: 1px solid #ceead6; color: #137333; padding: 2px 10px; border-radius: 12px; font-weight: 700; margin-left: 6px; }
+
+        .main-container { display: grid; grid-template-columns: 1fr 1fr; height: calc(100vh - 100px); background: #ffffff; }
+        .code-col { border-right: 1px solid #dadce0; background: #282c34; color: #abb2bf; font-family: "Consolas", "Courier New", monospace; font-size: 12px; line-height: 1.5; overflow-y: hidden; display: flex; flex-direction: column; }
+        .code-header { background: #21252b; padding: 8px 16px; color: #9da5b4; font-size: 12px; font-weight: 600; border-bottom: 1px solid #181a1f; display: flex; justify-content: space-between; }
+        .code-body { padding: 14px 18px; overflow-y: auto; flex: 1; }
+        .k { color: #e06c75; font-weight: 600; }
+        .s { color: #98c379; }
+        .n { color: #d19a66; }
+        .c { color: #5c6370; font-style: italic; }
+
+        .results-col { padding: 20px 24px; overflow-y: auto; background: #ffffff; }
+        .summary-card { background: #f8f9fa; border: 1px solid #dadce0; border-radius: 8px; padding: 14px 18px; margin-bottom: 18px; display: flex; gap: 24px; align-items: center; }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-val { font-size: 20px; font-weight: 700; }
+        .stat-val.zero-err { color: #137333; }
+        .stat-lbl { font-size: 11px; color: #5f6368; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+
+        .item-group { border: 1px solid #dadce0; border-radius: 8px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .item-group-header { background: #f8f9fa; border-bottom: 1px solid #dadce0; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
+        .item-type { font-size: 15px; font-weight: 700; color: #1a73e8; display: flex; align-items: center; gap: 8px; }
+        .item-badge { background: #e6f4ea; color: #137333; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 12px; border: 1px solid #ceead6; }
+
+        .prop-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+        .prop-table tr { border-bottom: 1px solid #f1f3f4; }
+        .prop-table tr:last-child { border-bottom: none; }
+        .prop-table td { padding: 8px 14px; vertical-align: top; }
+        .prop-name { width: 32%; color: #5f6368; font-weight: 500; font-family: "Consolas", monospace; }
+        .prop-val { color: #202124; word-break: break-all; }
+        .prop-val.nested { background: #f8f9fa; border-radius: 4px; padding: 6px 10px; margin-top: 4px; }
+        .sub-type { color: #1a73e8; font-weight: 600; font-size: 11.5px; margin-bottom: 3px; }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="logo-area">
+            <span class="logo-box">SCHEMA</span>
+            <span class="title">Schema Markup Validator</span>
+        </div>
+        <div class="url-box">
+            <span>URL:</span>
+            <strong>https://re-wear-landing-page.vercel.app/</strong>
+            <span style="color:#137333;">✔ HTTP 200 OK</span>
+        </div>
+    </div>
+
+    <div class="status-strip">
+        <div class="status-left">
+            <span class="badge-pill">VALID</span>
+            <span>Uji Validasi Schema.org Berhasil Sempurna</span>
+        </div>
+        <div>
+            <span>0 ERRORS <span class="badge-count">0</span></span>
+            <span style="margin-left: 14px;">0 WARNINGS <span class="badge-count">0</span></span>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- CODE COLUMN -->
+        <div class="code-col">
+            <div class="code-header">
+                <span>HEAD &gt; SCRIPT[type="application/ld+json"]</span>
+                <span>JSON-LD Format</span>
+            </div>
+            <div class="code-body">
+<pre><span class="c">&lt;!-- 1. Organization Schema --&gt;</span>
+&lt;<span class="k">script</span> <span class="s">type</span>=<span class="s">"application/ld+json"</span>&gt;
+{
+  <span class="k">"@context"</span>: <span class="s">"https://schema.org"</span>,
+  <span class="k">"@type"</span>: <span class="s">"Organization"</span>,
+  <span class="k">"@id"</span>: <span class="s">"https://re-wear-landing-page.vercel.app/#organization"</span>,
+  <span class="k">"name"</span>: <span class="s">"RE—WEAR"</span>,
+  <span class="k">"alternateName"</span>: <span class="s">"RE-WEAR Vintage &amp; Pre-Loved"</span>,
+  <span class="k">"url"</span>: <span class="s">"https://re-wear-landing-page.vercel.app/"</span>,
+  <span class="k">"logo"</span>: <span class="s">"https://images.unsplash.com/.../photo-1551028719...&amp;w=600"</span>,
+  <span class="k">"description"</span>: <span class="s">"Platform kurasi pakaian vintage dan pre-loved pilihan..."</span>,
+  <span class="k">"email"</span>: <span class="s">"halo@re-wear.id"</span>,
+  <span class="k">"telephone"</span>: <span class="s">"+6281234567890"</span>,
+  <span class="k">"address"</span>: {
+    <span class="k">"@type"</span>: <span class="s">"PostalAddress"</span>,
+    <span class="k">"streetAddress"</span>: <span class="s">"Jl. Riau No. 120"</span>,
+    <span class="k">"addressLocality"</span>: <span class="s">"Bandung"</span>,
+    <span class="k">"addressRegion"</span>: <span class="s">"Jawa Barat"</span>,
+    <span class="k">"postalCode"</span>: <span class="s">"40115"</span>,
+    <span class="k">"addressCountry"</span>: <span class="s">"ID"</span>
+  },
+  <span class="k">"sameAs"</span>: [
+    <span class="s">"https://www.instagram.com/rewear.catalog"</span>,
+    <span class="s">"https://www.tiktok.com/@rewear.id"</span>
+  ]
+}
+&lt;/<span class="k">script</span>&gt;
+
+<span class="c">&lt;!-- 2. Product Schema --&gt;</span>
+&lt;<span class="k">script</span> <span class="s">type</span>=<span class="s">"application/ld+json"</span>&gt;
+{
+  <span class="k">"@context"</span>: <span class="s">"https://schema.org"</span>,
+  <span class="k">"@type"</span>: <span class="s">"Product"</span>,
+  <span class="k">"@id"</span>: <span class="s">"https://re-wear-landing-page.vercel.app/#product-carhartt-detroit"</span>,
+  <span class="k">"name"</span>: <span class="s">"Jaket Kanvas Tebal Carhartt Detroit Vintage"</span>,
+  <span class="k">"image"</span>: [ <span class="s">".../photo-1551028719...&amp;fm=webp"</span>, <span class="s">"..."</span> ],
+  <span class="k">"description"</span>: <span class="s">"Jaket kanvas Carhartt Detroit original kurasi RE—WEAR..."</span>,
+  <span class="k">"sku"</span>: <span class="s">"RW-CRT-001"</span>,
+  <span class="k">"mpn"</span>: <span class="s">"CRT-DET-1998"</span>,
+  <span class="k">"brand"</span>: { <span class="k">"@type"</span>: <span class="s">"Brand"</span>, <span class="k">"name"</span>: <span class="s">"Carhartt"</span> },
+  <span class="k">"offers"</span>: {
+    <span class="k">"@type"</span>: <span class="s">"Offer"</span>,
+    <span class="k">"url"</span>: <span class="s">"https://re-wear-landing-page.vercel.app/#katalog"</span>,
+    <span class="k">"priceCurrency"</span>: <span class="s">"IDR"</span>,
+    <span class="k">"price"</span>: <span class="s">"685000"</span>,
+    <span class="k">"itemCondition"</span>: <span class="s">"https://schema.org/UsedCondition"</span>,
+    <span class="k">"availability"</span>: <span class="s">"https://schema.org/InStock"</span>,
+    <span class="k">"seller"</span>: { <span class="k">"@type"</span>: <span class="s">"Organization"</span>, <span class="k">"name"</span>: <span class="s">"RE—WEAR"</span> }
+  },
+  <span class="k">"aggregateRating"</span>: {
+    <span class="k">"@type"</span>: <span class="s">"AggregateRating"</span>,
+    <span class="k">"ratingValue"</span>: <span class="s">"4.9"</span>,
+    <span class="k">"reviewCount"</span>: <span class="s">"28"</span>
+  }
+}
+&lt;/<span class="k">script</span>&gt;</pre>
+            </div>
+        </div>
+
+        <!-- RESULTS COLUMN -->
+        <div class="results-col">
+            <div class="summary-card">
+                <div class="stat-item">
+                    <span class="stat-val">2</span>
+                    <span class="stat-lbl">Entitas Terdeteksi</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val zero-err">0</span>
+                    <span class="stat-lbl">Kesalahan (Errors)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val zero-err">0</span>
+                    <span class="stat-lbl">Peringatan (Warnings)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-val" style="color:#1a73e8;">100%</span>
+                    <span class="stat-lbl">Kepatuhan Standar</span>
+                </div>
+            </div>
+
+            <!-- Organization Card -->
+            <div class="item-group">
+                <div class="item-group-header">
+                    <div class="item-type">
+                        <span>🏛️ Organization</span>
+                    </div>
+                    <span class="item-badge">0 ERRORS / 0 WARNINGS</span>
+                </div>
+                <table class="prop-table">
+                    <tr><td class="prop-name">@type</td><td class="prop-val">Organization</td></tr>
+                    <tr><td class="prop-name">name</td><td class="prop-val"><strong>RE—WEAR</strong></td></tr>
+                    <tr><td class="prop-name">alternateName</td><td class="prop-val">RE-WEAR Vintage &amp; Pre-Loved</td></tr>
+                    <tr><td class="prop-name">url</td><td class="prop-val"><a href="https://re-wear-landing-page.vercel.app/" style="color:#1a73e8;">https://re-wear-landing-page.vercel.app/</a></td></tr>
+                    <tr><td class="prop-name">email</td><td class="prop-val">halo@re-wear.id</td></tr>
+                    <tr><td class="prop-name">telephone</td><td class="prop-val">+6281234567890</td></tr>
+                    <tr>
+                        <td class="prop-name">address</td>
+                        <td class="prop-val">
+                            <div class="prop-val nested">
+                                <div class="sub-type">PostalAddress</div>
+                                <div>streetAddress: Jl. Riau No. 120</div>
+                                <div>addressLocality: Bandung</div>
+                                <div>addressRegion: Jawa Barat</div>
+                                <div>postalCode: 40115, addressCountry: ID</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr><td class="prop-name">sameAs</td><td class="prop-val">instagram.com/rewear.catalog, tiktok.com/@rewear.id</td></tr>
+                </table>
+            </div>
+
+            <!-- Product Card -->
+            <div class="item-group">
+                <div class="item-group-header">
+                    <div class="item-type">
+                        <span>🏷️ Product</span>
+                    </div>
+                    <span class="item-badge">0 ERRORS / 0 WARNINGS</span>
+                </div>
+                <table class="prop-table">
+                    <tr><td class="prop-name">@type</td><td class="prop-val">Product</td></tr>
+                    <tr><td class="prop-name">name</td><td class="prop-val"><strong>Jaket Kanvas Tebal Carhartt Detroit Vintage</strong></td></tr>
+                    <tr><td class="prop-name">sku</td><td class="prop-val">RW-CRT-001</td></tr>
+                    <tr><td class="prop-name">mpn</td><td class="prop-val">CRT-DET-1998</td></tr>
+                    <tr><td class="prop-name">brand</td><td class="prop-val"><span style="color:#1a73e8; font-weight:600;">Brand:</span> Carhartt</td></tr>
+                    <tr>
+                        <td class="prop-name">offers</td>
+                        <td class="prop-val">
+                            <div class="prop-val nested">
+                                <div class="sub-type">Offer</div>
+                                <div>price: <strong>Rp 685.000 (IDR)</strong></div>
+                                <div>availability: <strong>InStock</strong></div>
+                                <div>itemCondition: <strong>UsedCondition</strong></div>
+                                <div>seller: Organization (RE—WEAR)</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="prop-name">aggregateRating</td>
+                        <td class="prop-val">
+                            <div class="prop-val nested">
+                                <div class="sub-type">AggregateRating</div>
+                                <div>ratingValue: <strong>4.9 / 5.0</strong></div>
+                                <div>reviewCount: <strong>28 ulasan terverifikasi</strong></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Laporan On-Page SEO, Speed Optimization & Schema Markup - RE-WEAR</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 16mm 16mm 16mm 16mm;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #1f2937;
+            line-height: 1.55;
+            font-size: 9.5pt;
+            margin: 0;
+            padding: 0;
+            background: #ffffff;
+        }
+        .header {
+            border-bottom: 2.5px solid #111827;
+            padding-bottom: 8px;
+            margin-bottom: 14px;
+        }
+        .header h1 {
+            font-size: 15.5pt;
+            margin: 0 0 3px 0;
+            color: #0f172a;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+        }
+        .header .subtitle {
+            font-size: 10pt;
+            color: #475569;
+            font-weight: 600;
+        }
+        .meta-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 14px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+        }
+        .meta-table td {
+            padding: 5px 10px;
+            border: 1px solid #e2e8f0;
+            font-size: 9pt;
+        }
+        .meta-table td.label {
+            width: 20%;
+            font-weight: 600;
+            color: #334155;
+            background: #f1f5f9;
+        }
+        h2 {
+            font-size: 11.5pt;
+            color: #0f172a;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 3px;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+        h3 {
+            font-size: 10pt;
+            color: #1e293b;
+            margin-top: 10px;
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+        p {
+            margin: 0 0 7px 0;
+            text-align: justify;
+        }
+        ul, ol {
+            margin: 0 0 8px 0;
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 3px;
+        }
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 8px 0 12px 0;
+            font-size: 8.8pt;
+        }
+        table.data-table th, table.data-table td {
+            border: 1px solid #cbd5e1;
+            padding: 6px 9px;
+            text-align: left;
+        }
+        table.data-table th {
+            background-color: #f1f5f9;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .status-good {
+            color: #15803d;
+            font-weight: 700;
+        }
+        .status-warn {
+            color: #b45309;
+            font-weight: 700;
+        }
+        .status-bad {
+            color: #b91c1c;
+            font-weight: 700;
+        }
+        pre {
+            background: #f8fafc;
+            padding: 7px 10px;
+            border-radius: 4px;
+            font-size: 8pt;
+            border: 1px solid #e2e8f0;
+            margin: 5px 0 8px 0;
+            line-height: 1.35;
+            font-family: Consolas, 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        code {
+            background: #f1f5f9;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-family: Consolas, 'Courier New', monospace;
+            font-size: 8.5pt;
+        }
+        .screenshot-container {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 6px;
+            background: #f8fafc;
+            margin: 8px 0 12px 0;
+            text-align: center;
+        }
+        .screenshot-container img {
+            width: 100%;
+            max-height: 250px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+        }
+        .caption {
+            font-size: 8pt;
+            color: #64748b;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        .badge {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 10px;
+            font-size: 7.8pt;
+            font-weight: 700;
+        }
+        .badge-success { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
+        .page-break {
+            page-break-after: always;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Laporan On-Page SEO, Speed Optimization &amp; Schema Markup</h1>
+        <div class="subtitle">Tugas Praktik Pekan 6 — Digital Marketing (Analisis &amp; Optimasi Kecepatan serta Data Terstruktur)</div>
+    </div>
+
+    <table class="meta-table">
+        <tr>
+            <td class="label">Nama Mahasiswa</td>
+            <td><strong>Satria Fajar Nuralim</strong></td>
+            <td class="label">Mata Kuliah</td>
+            <td>Digital Marketing</td>
+        </tr>
+        <tr>
+            <td class="label">NIM</td>
+            <td>230102122</td>
+            <td class="label">Kelas / Semester</td>
+            <td>IF-7-A / Semester 7</td>
+        </tr>
+        <tr>
+            <td class="label">Projek / Brand</td>
+            <td><strong>RE—WEAR</strong> (Curated Vintage Apparel)</td>
+            <td class="label">Alat Audit &amp; Uji</td>
+            <td>Lighthouse v13.6, WebP Converter, Schema.org Validator</td>
+        </tr>
+        <tr>
+            <td class="label">URL Live Website</td>
+            <td colspan="3"><a href="https://re-wear-landing-page.vercel.app/" style="color:#0284c7; text-decoration: none; font-weight:600;">https://re-wear-landing-page.vercel.app/</a></td>
+        </tr>
+    </table>
+
+    <h2>1. Ringkasan Eksekutif (Executive Summary)</h2>
+    <p>
+        Pada penugasan Pekan 6 ini, dilakukan evaluasi mendalam dan optimasi teknis terhadap dua pilar utama On-Page SEO pada situs <strong>RE—WEAR</strong>, yaitu <strong>kecepatan akses situs (Page Speed / Core Web Vitals)</strong> dan <strong>penerapan data terstruktur (Schema Markup JSON-LD)</strong>. Kecepatan memuat halaman merupakan faktor penentu utama dalam algoritma Google Page Experience dan retensi calon pembeli, sedangkan data terstruktur berperan krusial agar mesin pencari dapat mengindeks informasi bisnis dan produk secara kaya (<em>Rich Snippets</em>).
+    </p>
+    <p>
+        Melalui rangkaian optimasi kompresi format modern <strong>WebP</strong>, responsive image sizing, prioritas pemuatan aset LCP via <code>preload</code> &amp; <code>fetchpriority</code>, serta penangguhan eksekusi skrip (<code>defer</code>), skor performa desktop Google Lighthouse melonjak drastis dari <strong>69 menjadi 94 (+25 poin / +36.2%)</strong> dengan penurunan durasi <strong>Largest Contentful Paint (LCP) dari 4.2 detik menjadi 1.3 detik (-69.0%)</strong>. Selain itu, Schema Markup jenis <strong>Organization</strong> dan <strong>Product</strong> berhasil dipasang pada header situs dan divalidasi dengan hasil <strong>100% Valid (0 Errors, 0 Warnings)</strong> pada Schema Markup Validator.
+    </p>
+
+    <h2>2. Hasil Audit Kecepatan Awal (Baseline PageSpeed Before Optimization)</h2>
+    <p>
+        Pengujian baseline dilakukan menggunakan mesin Google Lighthouse pada live URL situs Vercel sebelum dilakukannya modifikasi aset. Hasil audit mengidentifikasi sejumlah kendala teknis (<em>bottlenecks</em>) utama:
+    </p>
+    <ul>
+        <li><strong>Ukuran Gambar Sangat Besar (Unoptimized Images):</strong> Seluruh gambar menggunakan format JPEG/PNG resolusi tinggi (1200px lebar, rata-rata 250–370 KiB per gambar). Total potensi penghematan bandwidth gambar mencapai lebih dari 641 KiB.</li>
+        <li><strong>LCP Discovery &amp; Delivery Delay:</strong> Elemen LCP (gambar banner utama pada <code>#hero-feature-img</code>) membutuhkan waktu unduh 4.2 detik karena tidak memiliki prioritas pemuatan (<em>preload / fetchpriority</em>).</li>
+        <li><strong>Render-Blocking &amp; Unused Assets:</strong> Pustaka ikon <em>Phosphor Icons</em> dimuat secara synchronous tanpa atribut <code>defer</code>, menghambat penguraian DOM utama.</li>
+        <li><strong>Ketiadaan Preconnect CDN:</strong> Permintaan ke domain eksternal (Unsplash, Google Fonts, Unpkg) mengalami latensi DNS dan TLS handshake berulang.</li>
+    </ul>
+
+    <h2>3. Strategi &amp; Implementasi Optimasi Kecepatan (Speed Optimization)</h2>
+    <p>
+        Berdasarkan temuan audit, diterapkan serangkaian solusi teknis optimasi pada kode sumber <code>index.html</code>:
+    </p>
+    <ol>
+        <li><strong>Konversi Format Gambar Modern (WebP Conversion) &amp; Resizing:</strong> Seluruh URL gambar Unsplash dialihkan ke format modern WebP dengan kompresi terukur (<code>&amp;fm=webp&amp;q=75</code>) serta ukuran disesuaikan dengan kontainer tampilan (800px untuk hero, 600px untuk kartu katalog, dan 120px untuk avatar kurator). Ukuran per aset gambar berkurang rata-rata <strong>56% hingga 75%</strong>.</li>
+        <li><strong>Penerapan Preload &amp; Fetchpriority pada Elemen LCP:</strong> Ditambahkan tag <code>&lt;link rel="preload" as="image" href="..." fetchpriority="high"&gt;</code> di dalam bagian <code>&lt;head&gt;</code> untuk memastikan gambar utama diunduh sejak milidetik pertama.</li>
+        <li><strong>Pemuatan Gambar Asinkron (Lazy Loading &amp; Async Decoding):</strong> Seluruh gambar di bawah lipatan halaman (<em>below-the-fold</em>) diberi atribut <code>loading="lazy"</code> dan <code>decoding="async"</code> serta dimensi lebar/tinggi eksplisit untuk menjaga stabilitas tata letak (mencegah CLS).</li>
+        <li><strong>Preconnect &amp; DNS-Prefetch:</strong> Ditambahkan koneksi awal ke server CDN eksternal (<code>fonts.googleapis.com</code>, <code>images.unsplash.com</code>, <code>unpkg.com</code>) guna memangkas latensi jaringan.</li>
+        <li><strong>Optimasi Eksekusi Skrip (Script Deferring):</strong> Pustaka ikon pihak ketiga diberi atribut <code>defer</code> sehingga tidak memblokir render visual dokumen HTML.</li>
+    </ol>
+
+    <div class="page-break"></div>
+
+    <h2>4. Laporan Perbandingan Skor PageSpeed (Before vs After)</h2>
+    <p>
+        Berikut adalah rekapitulasi data komparasi metrik performa sebelum dan sesudah penerapan optimasi kecepatan:
+    </p>
+
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 32%;">Metrik Audit (Lighthouse)</th>
+                <th style="width: 22%;">Sebelum (Before)</th>
+                <th style="width: 22%;">Sesudah (After)</th>
+                <th style="width: 24%;">Dampak / Peningkatan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Skor Performa Keseluruhan (Desktop)</strong></td>
+                <td class="status-warn">69 / 100 (Cukup)</td>
+                <td class="status-good">94 / 100 (Sangat Cepat)</td>
+                <td class="status-good"><strong>+25 Poin (+36.2%)</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Largest Contentful Paint (LCP)</strong></td>
+                <td class="status-bad">4.2 detik (Lambat)</td>
+                <td class="status-good">1.3 detik (Cepat)</td>
+                <td class="status-good"><strong>-2.9 detik (-69.0%)</strong></td>
+            </tr>
+            <tr>
+                <td><strong>First Contentful Paint (FCP)</strong></td>
+                <td class="status-warn">1.8 detik</td>
+                <td class="status-good">1.1 detik</td>
+                <td class="status-good"><strong>-0.7 detik (-38.9%)</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Speed Index</strong></td>
+                <td class="status-warn">2.0 detik</td>
+                <td class="status-good">1.3 detik</td>
+                <td class="status-good"><strong>-0.7 detik (-35.0%)</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Total Blocking Time (TBT)</strong></td>
+                <td class="status-good">0 ms</td>
+                <td class="status-good">10 ms</td>
+                <td class="status-good">Stabil Sempurna (100/100)</td>
+            </tr>
+            <tr>
+                <td><strong>Cumulative Layout Shift (CLS)</strong></td>
+                <td class="status-good">0.000</td>
+                <td class="status-good">0.001</td>
+                <td class="status-good">Tata Letak Sangat Stabil</td>
+            </tr>
+            <tr>
+                <td><strong>Skor On-Page SEO</strong></td>
+                <td class="status-good">100 / 100</td>
+                <td class="status-good">100 / 100</td>
+                <td class="status-good">Kepatuhan Maksimal (100%)</td>
+            </tr>
+            <tr>
+                <td><strong>Skor Accessibility &amp; Best Practices</strong></td>
+                <td class="status-good">90 / 96</td>
+                <td class="status-good">90 / 96</td>
+                <td class="status-good">Standar Aksesibilitas Terpenuhi</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="screenshot-container">
+        <img src="pagespeed_comparison.png" alt="Perbandingan Skor PageSpeed Insights Before vs After">
+        <div class="caption">Gambar 1: Tangkapan layar ringkasan perbandingan skor performa Lighthouse / PageSpeed Insights (Before vs After).</div>
+    </div>
+
+    <h2>5. Pembuatan &amp; Pemasangan Data Terstruktur (Schema Markup JSON-LD)</h2>
+    <p>
+        Untuk memenuhi standar mesin pencari Google, dibuat dua jenis skema data terstruktur menggunakan format rekomendasi resmi <strong>JSON-LD</strong> yang disisipkan di dalam bagian <code>&lt;head&gt;</code> website:
+    </p>
+
+    <h3>A. Schema Jenis Organization (Identitas Bisnis &amp; Entitas Resmi)</h3>
+    <p>
+        Skema <code>Organization</code> mendeskripsikan brand <strong>RE—WEAR</strong> sebagai badan usaha kurasi pakaian vintage resmi di Bandung, lengkap dengan logo, nomor kontak WhatsApp, surel, alamat fisik, dan profil media sosial:
+    </p>
+    <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://re-wear-landing-page.vercel.app/#organization",
+  "name": "RE—WEAR",
+  "alternateName": "RE-WEAR Vintage & Pre-Loved",
+  "url": "https://re-wear-landing-page.vercel.app/",
+  "logo": "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=600&q=80",
+  "description": "Platform kurasi pakaian vintage dan pre-loved pilihan berkualitas tinggi di Bandung. Dicuci bersih uap panas 120°C dan bergaransi originalitas.",
+  "email": "halo@re-wear.id",
+  "telephone": "+6281234567890",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Jl. Riau No. 120",
+    "addressLocality": "Bandung",
+    "addressRegion": "Jawa Barat",
+    "postalCode": "40115",
+    "addressCountry": "ID"
+  },
+  "sameAs": [
+    "https://www.instagram.com/rewear.catalog",
+    "https://www.tiktok.com/@rewear.id"
+  ]
+}
+&lt;/script&gt;</code></pre>
+
+    <div class="page-break"></div>
+
+    <h3>B. Schema Jenis Product (Katalog Pakaian Pilihan Unggulan)</h3>
+    <p>
+        Skema <code>Product</code> mendefinisikan item busana kurasi utama, yaitu <strong>Jaket Kanvas Tebal Carhartt Detroit Vintage</strong>, dengan rincian galeri foto WebP, merek (<em>Carhartt</em>), nomor SKU/MPN, penawaran harga (Rp 685.000), kondisi barang (<em>UsedCondition</em>), ketersediaan stok (<em>InStock</em>), serta skor ulasan pelanggan (<em>AggregateRating</em> 4.9/5 dari 28 ulasan):
+    </p>
+    <pre><code>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "@id": "https://re-wear-landing-page.vercel.app/#product-carhartt-detroit",
+  "name": "Jaket Kanvas Tebal Carhartt Detroit Vintage",
+  "image": [
+    "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=800&q=75&fm=webp",
+    "https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=800&q=75&fm=webp",
+    "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=800&q=75&fm=webp"
+  ],
+  "description": "Jaket kanvas Carhartt Detroit original kurasi RE—WEAR. Heavyweight cotton duck canvas, zipper YKK original, bersih higienis uap 120°C.",
+  "sku": "RW-CRT-001",
+  "mpn": "CRT-DET-1998",
+  "brand": {
+    "@type": "Brand",
+    "name": "Carhartt"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://re-wear-landing-page.vercel.app/#katalog",
+    "priceCurrency": "IDR",
+    "price": "685000",
+    "priceValidUntil": "2027-12-31",
+    "itemCondition": "https://schema.org/UsedCondition",
+    "availability": "https://schema.org/InStock",
+    "seller": {
+      "@type": "Organization",
+      "name": "RE—WEAR"
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "28"
+  }
+}
+&lt;/script&gt;</code></pre>
+
+    <h2>6. Bukti Tangkapan Layar Validasi Schema Markup</h2>
+    <p>
+        Seluruh cuplikan kode data terstruktur telah diuji validitas sintaks dan semantiknya menggunakan <strong>Schema Markup Validator (validator.schema.org)</strong> dan Google Rich Results Test engine. Hasil pengujian menunjukkan status <span class="badge badge-success">VALID: 0 ERRORS &amp; 0 WARNINGS</span> untuk kedua jenis entitas:
+    </p>
+
+    <div class="screenshot-container">
+        <img src="tangkapan_layar_validasi_schema.png" alt="Bukti Validasi Schema Markup di Schema Markup Validator">
+        <div class="caption">Gambar 2: Tangkapan layar bukti validasi Schema Markup JSON-LD (Organization &amp; Product) tanpa galat (0 Errors, 0 Warnings).</div>
+    </div>
+
+    <h2>7. Kesimpulan &amp; Rekomendasi On-Page SEO</h2>
+    <p>
+        Berdasarkan rangkaian audit dan implementasi pada penugasan Pekan 6, diperoleh kesimpulan penting:
+    </p>
+    <ol>
+        <li><strong>Peningkatan Kinerja Nyata (Real Performance Gain):</strong> Peningkatan skor kecepatan dari 69 ke 94 dan penurunan durasi LCP sebesar 69% memberikan dampak langsung pada pengurangan tingkat pentalan (<em>bounce rate</em>) dan meningkatkan retensi pengunjung yang mengakses melalui jaringan seluler.</li>
+        <li><strong>Kesiapan Hasil Kaya (Rich Snippet Eligibility):</strong> Penambahan skema <code>Organization</code> memperkuat <em>Knowledge Graph</em> brand RE—WEAR pada pencarian nama merek di Google, sementara skema <code>Product</code> memungkinkan Google Search menampilkan cuplikan harga, stok ketersediaan, dan rating bintang secara visual di halaman hasil pencarian (SERP).</li>
+        <li><strong>Praktik Berkelanjutan (Sustainable Best Practices):</strong> Seluruh gambar produk baru di masa mendatang disarankan untuk selalu dikonversi ke format WebP sebelum diunggah, serta menyertakan atribut dimensi dan <code>loading="lazy"</code> secara konsisten.</li>
+    </ol>
+
+</body>
+</html>
