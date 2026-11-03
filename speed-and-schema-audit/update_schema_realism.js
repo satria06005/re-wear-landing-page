@@ -23,3 +23,4 @@ function updateFiles(file) {
 
 updateFiles('c:/Users/testdev/.gemini/antigravity-ide/scratch/re-wear-landing-page/index.html');
 updateFiles('c:/Users/testdev/Downloads/re_wear_landing_page.html');
+
