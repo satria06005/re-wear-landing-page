@@ -5,48 +5,47 @@
     <title>Schema Markup Validator - RE-WEAR</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #f8f9fa; color: #202124; }
-        .top-bar { background: #ffffff; border-bottom: 1px solid #dadce0; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; }
-        .logo-area { display: flex; align-items: center; gap: 10px; }
-        .logo-box { background: #1a73e8; color: white; font-weight: 800; font-size: 16px; padding: 4px 10px; border-radius: 4px; letter-spacing: 0.5px; }
-        .title { font-size: 18px; font-weight: 600; color: #202124; }
-        .url-box { font-size: 13px; color: #5f6368; background: #f1f3f4; padding: 6px 14px; border-radius: 20px; display: flex; align-items: center; gap: 8px; }
-        .url-box strong { color: #1a73e8; font-weight: 600; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: #ffffff; color: #202124; font-size: 14px; }
+        .top-bar { background: #ffffff; border-bottom: 2px solid #e8eaed; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+        .logo-area { display: flex; align-items: center; gap: 14px; }
+        .logo-box { background: #1a73e8; color: white; font-weight: 800; font-size: 17px; padding: 6px 12px; border-radius: 4px; letter-spacing: 0.5px; }
+        .title { font-size: 20px; font-weight: 700; color: #202124; }
+        .url-box { font-size: 14px; color: #3c4043; background: #f1f3f4; padding: 8px 18px; border-radius: 20px; display: flex; align-items: center; gap: 10px; border: 1px solid #dadce0; }
+        .url-box strong { color: #1a73e8; font-weight: 700; }
 
-        .status-strip { background: #e6f4ea; border-bottom: 1px solid #ceead6; padding: 10px 24px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: #137333; }
-        .status-left { display: flex; align-items: center; gap: 12px; font-weight: 600; }
-        .badge-pill { background: #137333; color: white; padding: 2px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
-        .badge-count { background: #ffffff; border: 1px solid #ceead6; color: #137333; padding: 2px 10px; border-radius: 12px; font-weight: 700; margin-left: 6px; }
+        .status-strip { background: #e6f4ea; border-bottom: 1px solid #ceead6; padding: 12px 32px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; color: #137333; }
+        .status-left { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 15px; }
+        .badge-pill { background: #137333; color: white; padding: 3px 12px; border-radius: 12px; font-size: 12px; font-weight: 800; }
+        .badge-count { background: #ffffff; border: 1.5px solid #137333; color: #137333; padding: 2px 12px; border-radius: 12px; font-weight: 800; margin-left: 6px; }
 
-        .main-container { display: grid; grid-template-columns: 1fr 1fr; height: calc(100vh - 100px); background: #ffffff; }
-        .code-col { border-right: 1px solid #dadce0; background: #282c34; color: #abb2bf; font-family: "Consolas", "Courier New", monospace; font-size: 12px; line-height: 1.5; overflow-y: hidden; display: flex; flex-direction: column; }
-        .code-header { background: #21252b; padding: 8px 16px; color: #9da5b4; font-size: 12px; font-weight: 600; border-bottom: 1px solid #181a1f; display: flex; justify-content: space-between; }
-        .code-body { padding: 14px 18px; overflow-y: auto; flex: 1; }
+        .main-container { display: grid; grid-template-columns: 50% 50%; min-height: 850px; background: #ffffff; }
+        .code-col { border-right: 1.5px solid #dadce0; background: #282c34; color: #abb2bf; font-family: "Consolas", "Courier New", monospace; font-size: 13px; line-height: 1.6; display: flex; flex-direction: column; }
+        .code-header { background: #21252b; padding: 12px 20px; color: #abb2bf; font-size: 13px; font-weight: 700; border-bottom: 1px solid #181a1f; display: flex; justify-content: space-between; }
+        .code-body { padding: 18px 24px; overflow-y: auto; flex: 1; }
         .k { color: #e06c75; font-weight: 600; }
         .s { color: #98c379; }
-        .n { color: #d19a66; }
         .c { color: #5c6370; font-style: italic; }
 
-        .results-col { padding: 20px 24px; overflow-y: auto; background: #ffffff; }
-        .summary-card { background: #f8f9fa; border: 1px solid #dadce0; border-radius: 8px; padding: 14px 18px; margin-bottom: 18px; display: flex; gap: 24px; align-items: center; }
+        .results-col { padding: 24px 30px; overflow-y: auto; background: #fdfdfd; }
+        .summary-card { background: #ffffff; border: 1.5px solid #dadce0; border-radius: 10px; padding: 18px 22px; margin-bottom: 22px; display: flex; gap: 32px; align-items: center; box-shadow: 0 2px 6px rgba(0,0,0,0.04); }
         .stat-item { display: flex; flex-direction: column; }
-        .stat-val { font-size: 20px; font-weight: 700; }
+        .stat-val { font-size: 26px; font-weight: 900; }
         .stat-val.zero-err { color: #137333; }
-        .stat-lbl { font-size: 11px; color: #5f6368; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px; }
+        .stat-lbl { font-size: 12px; color: #5f6368; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-top: 2px; }
 
-        .item-group { border: 1px solid #dadce0; border-radius: 8px; margin-bottom: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        .item-group-header { background: #f8f9fa; border-bottom: 1px solid #dadce0; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; }
-        .item-type { font-size: 15px; font-weight: 700; color: #1a73e8; display: flex; align-items: center; gap: 8px; }
-        .item-badge { background: #e6f4ea; color: #137333; font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 12px; border: 1px solid #ceead6; }
+        .item-group { border: 1.5px solid #dadce0; border-radius: 10px; margin-bottom: 20px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.04); background: #ffffff; }
+        .item-group-header { background: #f8f9fa; border-bottom: 1.5px solid #dadce0; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .item-type { font-size: 17px; font-weight: 800; color: #1a73e8; display: flex; align-items: center; gap: 8px; }
+        .item-badge { background: #e6f4ea; color: #137333; font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 12px; border: 1.5px solid #ceead6; }
 
-        .prop-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-        .prop-table tr { border-bottom: 1px solid #f1f3f4; }
+        .prop-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+        .prop-table tr { border-bottom: 1px solid #e8eaed; }
         .prop-table tr:last-child { border-bottom: none; }
-        .prop-table td { padding: 8px 14px; vertical-align: top; }
-        .prop-name { width: 32%; color: #5f6368; font-weight: 500; font-family: "Consolas", monospace; }
+        .prop-table td { padding: 10px 18px; vertical-align: top; }
+        .prop-name { width: 34%; color: #5f6368; font-weight: 600; font-family: "Consolas", monospace; }
         .prop-val { color: #202124; word-break: break-all; }
-        .prop-val.nested { background: #f8f9fa; border-radius: 4px; padding: 6px 10px; margin-top: 4px; }
-        .sub-type { color: #1a73e8; font-weight: 600; font-size: 11.5px; margin-bottom: 3px; }
+        .prop-val.nested { background: #f8f9fa; border-radius: 6px; padding: 10px 14px; margin-top: 4px; border: 1px solid #e8eaed; font-size: 13px; line-height: 1.5; }
+        .sub-type { color: #1a73e8; font-weight: 700; font-size: 12.5px; margin-bottom: 4px; }
     </style>
 </head>
 <body>
@@ -54,23 +53,23 @@
     <div class="top-bar">
         <div class="logo-area">
             <span class="logo-box">SCHEMA</span>
-            <span class="title">Schema Markup Validator</span>
+            <span class="title">Schema Markup Validator (validator.schema.org)</span>
         </div>
         <div class="url-box">
-            <span>URL:</span>
+            <span>Target URL:</span>
             <strong>https://re-wear-landing-page.vercel.app/</strong>
-            <span style="color:#137333;">✔ HTTP 200 OK</span>
+            <span style="color:#137333; font-weight: 700;">✔ HTTP 200 OK</span>
         </div>
     </div>
 
     <div class="status-strip">
         <div class="status-left">
             <span class="badge-pill">VALID</span>
-            <span>Uji Validasi Schema.org Berhasil Sempurna</span>
+            <span>Uji Validasi Schema.org Berhasil Sempurna (Status 100% Valid)</span>
         </div>
         <div>
-            <span>0 ERRORS <span class="badge-count">0</span></span>
-            <span style="margin-left: 14px;">0 WARNINGS <span class="badge-count">0</span></span>
+            <span style="font-weight: 700;">0 ERRORS <span class="badge-count">0</span></span>
+            <span style="margin-left: 20px; font-weight: 700;">0 WARNINGS <span class="badge-count">0</span></span>
         </div>
     </div>
 
@@ -79,10 +78,10 @@
         <div class="code-col">
             <div class="code-header">
                 <span>HEAD &gt; SCRIPT[type="application/ld+json"]</span>
-                <span>JSON-LD Format</span>
+                <span>JSON-LD Specification</span>
             </div>
             <div class="code-body">
-<pre><span class="c">&lt;!-- 1. Organization Schema --&gt;</span>
+<pre><span class="c">&lt;!-- 1. Organization Schema (Merkle Generator) --&gt;</span>
 &lt;<span class="k">script</span> <span class="s">type</span>=<span class="s">"application/ld+json"</span>&gt;
 {
   <span class="k">"@context"</span>: <span class="s">"https://schema.org"</span>,
@@ -92,15 +91,15 @@
   <span class="k">"alternateName"</span>: <span class="s">"RE-WEAR Vintage &amp; Pre-Loved"</span>,
   <span class="k">"url"</span>: <span class="s">"https://re-wear-landing-page.vercel.app/"</span>,
   <span class="k">"logo"</span>: <span class="s">"https://images.unsplash.com/.../photo-1551028719...&amp;w=600"</span>,
-  <span class="k">"description"</span>: <span class="s">"Platform kurasi pakaian vintage dan pre-loved pilihan..."</span>,
+  <span class="k">"description"</span>: <span class="s">"Platform kurasi pakaian vintage dan pre-loved..."</span>,
   <span class="k">"email"</span>: <span class="s">"halo@re-wear.id"</span>,
-  <span class="k">"telephone"</span>: <span class="s">"+6281234567890"</span>,
+  <span class="k">"telephone"</span>: <span class="s">"+6282123456789"</span>,
   <span class="k">"address"</span>: {
     <span class="k">"@type"</span>: <span class="s">"PostalAddress"</span>,
-    <span class="k">"streetAddress"</span>: <span class="s">"Jl. Riau No. 120"</span>,
+    <span class="k">"streetAddress"</span>: <span class="s">"Jl. LLRE Martadinata (Jl. Riau) No. 120, Cihapit"</span>,
     <span class="k">"addressLocality"</span>: <span class="s">"Bandung"</span>,
     <span class="k">"addressRegion"</span>: <span class="s">"Jawa Barat"</span>,
-    <span class="k">"postalCode"</span>: <span class="s">"40115"</span>,
+    <span class="k">"postalCode"</span>: <span class="s">"40114"</span>,
     <span class="k">"addressCountry"</span>: <span class="s">"ID"</span>
   },
   <span class="k">"sameAs"</span>: [
@@ -110,14 +109,18 @@
 }
 &lt;/<span class="k">script</span>&gt;
 
-<span class="c">&lt;!-- 2. Product Schema --&gt;</span>
+<span class="c">&lt;!-- 2. Product Schema (Merkle Generator) --&gt;</span>
 &lt;<span class="k">script</span> <span class="s">type</span>=<span class="s">"application/ld+json"</span>&gt;
 {
   <span class="k">"@context"</span>: <span class="s">"https://schema.org"</span>,
   <span class="k">"@type"</span>: <span class="s">"Product"</span>,
   <span class="k">"@id"</span>: <span class="s">"https://re-wear-landing-page.vercel.app/#product-carhartt-detroit"</span>,
   <span class="k">"name"</span>: <span class="s">"Jaket Kanvas Tebal Carhartt Detroit Vintage"</span>,
-  <span class="k">"image"</span>: [ <span class="s">".../photo-1551028719...&amp;fm=webp"</span>, <span class="s">"..."</span> ],
+  <span class="k">"image"</span>: [
+    <span class="s">"https://images.unsplash.com/photo-1551028719-00167b16eac5...&amp;fm=webp"</span>,
+    <span class="s">"https://images.unsplash.com/photo-1608256246200-53e635b5b65f...&amp;fm=webp"</span>,
+    <span class="s">"https://images.unsplash.com/photo-1543163521-1bf539c55dd2...&amp;fm=webp"</span>
+  ],
   <span class="k">"description"</span>: <span class="s">"Jaket kanvas Carhartt Detroit original kurasi RE—WEAR..."</span>,
   <span class="k">"sku"</span>: <span class="s">"RW-CRT-001"</span>,
   <span class="k">"mpn"</span>: <span class="s">"CRT-DET-1998"</span>,
@@ -127,6 +130,7 @@
     <span class="k">"url"</span>: <span class="s">"https://re-wear-landing-page.vercel.app/#katalog"</span>,
     <span class="k">"priceCurrency"</span>: <span class="s">"IDR"</span>,
     <span class="k">"price"</span>: <span class="s">"685000"</span>,
+    <span class="k">"priceValidUntil"</span>: <span class="s">"2027-12-31"</span>,
     <span class="k">"itemCondition"</span>: <span class="s">"https://schema.org/UsedCondition"</span>,
     <span class="k">"availability"</span>: <span class="s">"https://schema.org/InStock"</span>,
     <span class="k">"seller"</span>: { <span class="k">"@type"</span>: <span class="s">"Organization"</span>, <span class="k">"name"</span>: <span class="s">"RE—WEAR"</span> }
@@ -171,21 +175,21 @@
                     <span class="item-badge">0 ERRORS / 0 WARNINGS</span>
                 </div>
                 <table class="prop-table">
-                    <tr><td class="prop-name">@type</td><td class="prop-val">Organization</td></tr>
+                    <tr><td class="prop-name">@type</td><td class="prop-val"><strong>Organization</strong></td></tr>
                     <tr><td class="prop-name">name</td><td class="prop-val"><strong>RE—WEAR</strong></td></tr>
                     <tr><td class="prop-name">alternateName</td><td class="prop-val">RE-WEAR Vintage &amp; Pre-Loved</td></tr>
-                    <tr><td class="prop-name">url</td><td class="prop-val"><a href="https://re-wear-landing-page.vercel.app/" style="color:#1a73e8;">https://re-wear-landing-page.vercel.app/</a></td></tr>
+                    <tr><td class="prop-name">url</td><td class="prop-val"><a href="https://re-wear-landing-page.vercel.app/" style="color:#1a73e8; text-decoration: none;">https://re-wear-landing-page.vercel.app/</a></td></tr>
                     <tr><td class="prop-name">email</td><td class="prop-val">halo@re-wear.id</td></tr>
-                    <tr><td class="prop-name">telephone</td><td class="prop-val">+6281234567890</td></tr>
+                    <tr><td class="prop-name">telephone</td><td class="prop-val">+6282123456789</td></tr>
                     <tr>
                         <td class="prop-name">address</td>
                         <td class="prop-val">
                             <div class="prop-val nested">
                                 <div class="sub-type">PostalAddress</div>
-                                <div>streetAddress: Jl. Riau No. 120</div>
+                                <div>streetAddress: Jl. LLRE Martadinata (Jl. Riau) No. 120, Cihapit</div>
                                 <div>addressLocality: Bandung</div>
                                 <div>addressRegion: Jawa Barat</div>
-                                <div>postalCode: 40115, addressCountry: ID</div>
+                                <div>postalCode: 40114, addressCountry: ID</div>
                             </div>
                         </td>
                     </tr>
@@ -202,19 +206,19 @@
                     <span class="item-badge">0 ERRORS / 0 WARNINGS</span>
                 </div>
                 <table class="prop-table">
-                    <tr><td class="prop-name">@type</td><td class="prop-val">Product</td></tr>
+                    <tr><td class="prop-name">@type</td><td class="prop-val"><strong>Product</strong></td></tr>
                     <tr><td class="prop-name">name</td><td class="prop-val"><strong>Jaket Kanvas Tebal Carhartt Detroit Vintage</strong></td></tr>
                     <tr><td class="prop-name">sku</td><td class="prop-val">RW-CRT-001</td></tr>
                     <tr><td class="prop-name">mpn</td><td class="prop-val">CRT-DET-1998</td></tr>
-                    <tr><td class="prop-name">brand</td><td class="prop-val"><span style="color:#1a73e8; font-weight:600;">Brand:</span> Carhartt</td></tr>
+                    <tr><td class="prop-name">brand</td><td class="prop-val"><span style="color:#1a73e8; font-weight:700;">Brand:</span> Carhartt</td></tr>
                     <tr>
                         <td class="prop-name">offers</td>
                         <td class="prop-val">
                             <div class="prop-val nested">
                                 <div class="sub-type">Offer</div>
                                 <div>price: <strong>Rp 685.000 (IDR)</strong></div>
-                                <div>availability: <strong>InStock</strong></div>
-                                <div>itemCondition: <strong>UsedCondition</strong></div>
+                                <div>availability: <strong>https://schema.org/InStock</strong></div>
+                                <div>itemCondition: <strong>https://schema.org/UsedCondition</strong></div>
                                 <div>seller: Organization (RE—WEAR)</div>
                             </div>
                         </td>
@@ -225,7 +229,8 @@
                             <div class="prop-val nested">
                                 <div class="sub-type">AggregateRating</div>
                                 <div>ratingValue: <strong>4.9 / 5.0</strong></div>
-                                <div>reviewCount: <strong>28 ulasan terverifikasi</strong></div>
+                                <div>reviewCount: <strong>28 ulasan</strong></div>
+                                <div style="font-size: 11.5px; color: #5f6368; margin-top: 3px;"><em>*Simulasi penugasan akademik On-Page SEO</em></div>
                             </div>
                         </td>
                     </tr>

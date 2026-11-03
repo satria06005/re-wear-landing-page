@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Google Lighthouse Real Audit Comparison</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f1f5f9; padding: 20px; color: #0f172a; }
+        .wrapper { max-width: 1300px; margin: 0 auto; }
+        .title-bar { background: #ffffff; padding: 16px 24px; border-radius: 8px; border: 1px solid #cbd5e1; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .title-bar h2 { font-size: 18px; font-weight: 800; color: #0f172a; }
+        .title-bar p { font-size: 13px; color: #64748b; margin-top: 2px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .col { background: #ffffff; border-radius: 8px; border: 1px solid #cbd5e1; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+        .col-header { padding: 12px 18px; font-weight: 700; font-size: 14px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #e2e8f0; }
+        .before-h { background: #fffbeb; color: #b45309; border-top: 4px solid #f59e0b; }
+        .after-h { background: #ecfdf5; color: #047857; border-top: 4px solid #10b981; }
+        .report-frame { width: 100%; height: 750px; border: none; }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="title-bar">
+            <div>
+                <h2>Hasil Tangkapan Layar Resmi Google Lighthouse (Before vs After)</h2>
+                <p>Uji Performa Langsung pada Situs: https://re-wear-landing-page.vercel.app/</p>
+            </div>
+            <div style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 6px 14px; border-radius: 20px; font-weight: 600;">
+                Lighthouse v13.6.0 Desktop Mode
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col">
+                <div class="col-header before-h">
+                    <span>1. SEBELUM OPTIMASI (BEFORE)</span>
+                    <span>Skor Performa: 69 (LCP: 4.2 detik)</span>
+                </div>
+                <iframe class="report-frame" src="lighthouse-before.report.html"></iframe>
+            </div>
+
+            <div class="col">
+                <div class="col-header after-h">
+                    <span>2. SESUDAH OPTIMASI (AFTER)</span>
+                    <span>Skor Performa: 94 (LCP: 1.3 detik)</span>
+                </div>
+                <iframe class="report-frame" src="lighthouse-after.report.html"></iframe>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -204,3 +204,4 @@ function optimizeHtml(filePath) {
 
 optimizeHtml('c:/Users/testdev/.gemini/antigravity-ide/scratch/re-wear-landing-page/index.html');
 optimizeHtml('c:/Users/testdev/Downloads/re_wear_landing_page.html');
+
